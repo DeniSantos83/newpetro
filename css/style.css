@@ -1,0 +1,368 @@
+:root{
+  --brand:#1653d1;
+  --brand-2:#e63946;
+  --ink:#191f2b;
+  --muted:#6b7280;
+  --bg:#ffffff;
+  --soft:#f6f8fc;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+/* Utilitários */
+.text-brand{color:var(--brand)}
+.bg-soft-brand{background:rgba(22,83,209,.12)}
+.text-white-75{color:rgba(255,255,255,.85)}
+.section-pad{padding:72px 0}
+.section-head{margin-bottom:28px}
+.section-head .h1{margin:0 0 6px}
+
+/* Navbar “glass” */
+.glass-nav{
+  backdrop-filter: saturate(180%) blur(16px);
+  background: rgba(255,255,255,.75);
+  box-shadow: 0 1px 0 rgba(15,23,42,.06);
+  transition: box-shadow .25s ease, background .25s ease;
+}
+.navbar.scrolled{
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 6px 24px rgba(15,23,42,.08);
+}
+.nav-link{font-weight:500}
+
+/* Botões */
+.btn-brand{
+  --bs-btn-bg: var(--brand);
+  --bs-btn-border-color: var(--brand);
+  --bs-btn-hover-bg: #0f3fa2;
+  --bs-btn-hover-border-color:#0f3fa2;
+  --bs-btn-color:#fff;
+}
+
+/* HERO */
+.hero{
+  position: relative;
+  min-height: 78vh;
+  color:#fff;
+  background: url("../img/bkg4.jpg") center/cover no-repeat fixed;
+}
+.hero-overlay{
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(6,20,55,.55), rgba(6,20,55,.35) 30%, rgba(6,20,55,.65) 85%);
+}
+.hero .badge{border-radius:999px; padding:.5rem .9rem}
+.hero-kpis{display:flex; gap:24px; flex-wrap:wrap}
+.hero-kpis div{
+  display:flex; flex-direction:column; align-items:flex-start;
+  color:#fff; border-left:3px solid rgba(255,255,255,.4); padding-left:12px
+}
+.hero-kpis strong{font-size:1.25rem}
+
+/* tamanho padrão (desktop/tablet) */
+.hero-sub{
+  font-size: 1.125rem;   /* ~18px, ajuste se quiser */
+  line-height: 1.45;
+}
+
+/* mobile: bem menor */
+@media (max-width: 575.98px){
+  .hero-sub{
+    font-size: .82rem;   /* ~13px */
+    line-height: 1.35;
+    margin-bottom: .75rem;     /* opcional: reduz o espaço */
+  }
+}
+
+/* Especialidades (ícone maior + título compacto) */
+.card-service{
+  border:1px solid rgba(2,6,23,.06);
+  padding:22px; border-radius:16px;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  background:#fff;
+}
+.card-service:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(15,23,42,.08);
+  border-color: rgba(22,83,209,.22);
+}
+.card-service .icon{width:84px; height:84px; margin-bottom:12px}
+.card-service h3{
+  font-size: 1rem;
+  line-height: 1.25;
+  margin-bottom: 6px;
+  letter-spacing: .2px;
+}
+@media (min-width: 992px){
+  .card-service .icon{ width: 92px; height: 92px; }
+}
+
+/* Strip CTA */
+.strip-cta{
+  background: linear-gradient(180deg, rgba(0,72,255,.315), rgba(255,255,255,.411) 30%, rgba(170,169,243,.308) 55%);
+  padding: 18px 0;
+}
+.strip-cta p{color:var(--ink)}
+
+/* Notícias */
+.card-news{
+  overflow:hidden; border:0; border-radius:16px;
+  box-shadow: 0 4px 18px rgba(15,23,42,.06);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.card-news:hover{transform: translateY(-4px); box-shadow: 0 14px 38px rgba(15,23,42,.12)}
+.card-news .card-img-top{aspect-ratio: 16/9; object-fit: cover}
+.card-news .badge{border-radius:999px}
+
+/* === CLIENTES: marquee com arraste === */
+.client{
+  width: 160px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+}
+.client img, .client svg{
+  max-height: 44px;
+  max-width: 140px;
+  height: auto !important;
+  width: auto !important;
+  display: block;
+  filter: grayscale(1) contrast(1.1) opacity(.85);
+  transition: filter .2s ease;
+}
+.client:hover img, .client:hover svg{ filter: none }
+
+/* container do marquee */
+.clients-marquee {
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.clients-marquee:active {
+  cursor: grabbing;
+}
+
+.clients-marquee .track {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
+.client {
+  width: 160px;
+  height: 60px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.client img,
+.client svg {
+  max-height: 44px;
+  max-width: 140px;
+  filter: grayscale(1) contrast(1.1) opacity(.85);
+  transition: filter .2s ease;
+}
+
+.client:hover img,
+.client:hover svg {
+  filter: none;
+}
+/* Cards de canais */
+.card-quick{
+  border:1px solid rgba(2,6,23,.06); padding:22px; border-radius:16px; text-decoration:none; color:inherit;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  background:#fff; display:flex; flex-direction:column; align-items:flex-start; gap:10px;
+}
+.card-quick i{font-size:1.6rem; color:var(--brand)}
+.card-quick:hover{
+  transform: translateY(-4px);
+  border-color: rgba(22,83,209,.28);
+  box-shadow: 0 12px 28px rgba(15,23,42,.08);
+}
+/* ===== Canais modernos ===== */
+.canal-card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:18px 14px;
+  border-radius:14px;
+  text-decoration:none;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(15,23,42,.08);
+  color: var(--ink);
+  transition: all .3s ease;
+  height:100%;
+}
+
+.canal-card img{
+  width:40px;
+  height:40px;
+  margin-bottom:12px;
+  transition: transform .3s ease;
+}
+
+.canal-card h3{
+  font-size:.95rem;
+  margin-bottom: 2px;
+}
+
+.canal-card span{
+  font-size:.8rem;
+  color:var(--muted);
+  margin-top:4px;
+  line-height:1.35;
+}
+
+.canal-card:hover{
+  background: linear-gradient(145deg, rgba(22,83,209,.15), rgba(255,255,255,0.15));
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(15,23,42,.1);
+}
+
+.canal-card:hover img{
+  transform: scale(1.08);
+}
+
+@media (prefers-color-scheme: dark){
+  .bg-soft{ background:#0e1525; }
+  .canal-card{ background: rgba(255,255,255,0.04); color:#e5e7eb; }
+  .canal-card span{ color:#9ca3af; }
+}
+/* Ícone composto (antisuborno) */
+.ico-stack{
+  position:relative; width:60px; height:60px;
+  display:inline-flex; align-items:center; justify-content:center;
+  margin-bottom:10px;
+}
+.ico-stack .base{ font-size:40px; line-height:1; }
+.ico-stack .slash{
+  position:absolute; font-size:38px; line-height:1;
+  color:#d11f2a; opacity:.95; /* destaque do "proibido" */
+}
+
+/* tamanho e cor padrão para TODOS os ícones (Bootstrap Icons) */
+.canal-card i.bi{
+  font-size: 38px;      /* aumente/diminua aqui (ex.: 36, 48, 56...) */
+  line-height: 1;
+  margin-bottom: 10px;
+  color: #ce4843;
+}
+
+/* compactação extra em telas pequenas */
+@media (max-width: 575.98px){
+  .canal-card{ padding:14px 12px; border-radius:12px; }
+  .canal-icon{ font-size:34px; margin-bottom:10px; }
+  .ico-stack{ width:34px; height:34px; }
+  .ico-stack .base{ font-size:34px; }
+  .ico-stack .slash{ font-size:32px; }
+  .canal-card h3{ font-size:.9rem; }
+  .canal-card span{ font-size:.78rem; }
+}
+
+/* modo escuro automático opcional */
+@media (prefers-color-scheme: dark){
+  .bg-soft{ background:#0e1525; }
+  .canal-card{ background: rgba(255,255,255,0.06); color:#e5e7eb; }
+  .canal-card span{ color:#9ca3af; }
+}
+/* CTA final */
+.cta-final{
+  background: linear-gradient(180deg, rgba(0,72,255,.315), rgba(255,255,255,.411) 30%, rgba(170,169,243,.308) 55%);
+  padding: 18px 0;
+}
+.cta-final p{color:var(--ink)}
+/* Footer */
+.footer{
+  background:#1a233f; color:#cbd5e1
+}
+.footer a{color:#cbd5e1;text-decoration:none}
+.footer a:hover{color:#fff;text-decoration:underline}
+
+.footer-sub{
+  font-size: 25px;
+}
+@media(max-width: 575.98px){
+  .footer-sub{
+    font-size: .92rem;   /* ~13px */
+    line-height: 1.35;
+    margin-bottom: .75rem;     /* opcional: reduz o espaço */
+  }
+}
+
+/* cartão discreto da marca */
+.footer-brand{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px;
+  border-radius:12px;
+  text-decoration:none;
+  background: rgba(255,255,255,.06);      /* glass leve */
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 8px rgba(15,23,42,.12);
+  transition: background .25s ease, box-shadow .25s ease, transform .2s ease;
+  margin-bottom: .75rem;                  /* substitui o .mb-3 que você usava */
+}
+
+/* logo em si */
+.footer-logo{
+  display:block;
+  height:46px;                            /* ajuste aqui o tamanho */
+  max-width: 220px;
+  object-fit: contain;
+  filter: grayscale(.2) contrast(1.05) opacity(.95);
+  transition: filter .25s ease, transform .2s ease;
+}
+
+/* hover bonito */
+.footer-brand:hover{
+  background: linear-gradient(145deg, rgba(22,83,209,.16), rgba(255,255,255,.14));
+  box-shadow: 0 12px 28px rgba(15,23,42,.20);
+  transform: translateY(-2px);
+}
+.footer-brand:hover .footer-logo{
+  filter: none;
+  transform: scale(1.02);
+}
+
+/* modo escuro do seu footer (se o fundo for bem escuro) */
+.footer{ background:#0f1424; }
+.footer .text-secondary{ color:#cbd5e1 !important; }
+@media (prefers-color-scheme: dark){
+  .footer-brand{ background: rgba(255,255,255,.05); }
+  .footer-logo{ filter: grayscale(.15) brightness(1.05); }
+}
+
+.mb-3 {
+  border-radius: 10px;
+}
+.mb-3:hover {
+  background: linear-gradient(145deg, rgba(22,83,209,.15), rgba(255,255,255,0.15));
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(154, 159, 168, 0.288);
+  
+}
+
+
+/* Helpers responsivos */
+@media (max-width: 991.98px){
+  .hero{min-height: 72vh; background-attachment: scroll}
+}
