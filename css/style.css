@@ -1,0 +1,512 @@
+:root{
+  --brand:#1653d1;
+  --brand-2:#e63946;
+  --ink:#191f2b;
+  --muted:#6b7280;
+  --bg:#ffffff;
+  --soft:#f6f8fc;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+/* Utilitários */
+.text-brand{color:var(--brand)}
+.bg-soft-brand{background:rgba(22,83,209,.12)}
+.text-white-75{color:rgba(255,255,255,.85)}
+.section-pad{padding:72px 0}
+.section-head{margin-bottom:28px}
+.section-head .h1{margin:0 0 6px}
+
+/* Navbar “glass” */
+.glass-nav{
+  backdrop-filter: saturate(180%) blur(16px);
+  background: rgba(255,255,255,.75);
+  box-shadow: 0 1px 0 rgba(15,23,42,.06);
+  transition: box-shadow .25s ease, background .25s ease;
+}
+.navbar.scrolled{
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 6px 24px rgba(15,23,42,.08);
+}
+.nav-link{font-weight:500}
+
+/* Botões */
+.btn-brand{
+  --bs-btn-bg: var(--brand);
+  --bs-btn-border-color: var(--brand);
+  --bs-btn-hover-bg: #0f3fa2;
+  --bs-btn-hover-border-color:#0f3fa2;
+  --bs-btn-color:#fff;
+}
+
+/* HERO */
+.hero{
+  position: relative;
+  min-height: 78vh;
+  color:#fff;
+  background: url("../img/bkg4.jpg") center/cover no-repeat fixed;
+}
+.hero-overlay{
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(6,20,55,.55), rgba(6,20,55,.35) 30%, rgba(6,20,55,.65) 85%);
+}
+.hero .badge{border-radius:999px; padding:.5rem .9rem}
+.hero-kpis{display:flex; gap:24px; flex-wrap:wrap}
+.hero-kpis div{
+  display:flex; flex-direction:column; align-items:flex-start;
+  color:#fff; border-left:3px solid rgba(255,255,255,.4); padding-left:12px
+}
+.hero-kpis strong{font-size:1.25rem}
+
+/* tamanho padrão (desktop/tablet) */
+.hero-sub{
+  font-size: 1.125rem;   /* ~18px, ajuste se quiser */
+  line-height: 1.45;
+}
+
+/* mobile: bem menor */
+@media (max-width: 575.98px){
+  .hero-sub{
+    font-size: .82rem;   /* ~13px */
+    line-height: 1.35;
+    margin-bottom: .75rem;     /* opcional: reduz o espaço */
+  }
+}
+
+/* Especialidades (ícone maior + título compacto) */
+.card-service{
+  border:1px solid rgba(2,6,23,.06);
+  padding:22px; border-radius:16px;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  background:#fff;
+}
+.card-service:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(15,23,42,.08);
+  border-color: rgba(22,83,209,.22);
+}
+.card-service .icon{width:84px; height:84px; margin-bottom:12px}
+.card-service h3{
+  font-size: 1rem;
+  line-height: 1.25;
+  margin-bottom: 6px;
+  letter-spacing: .2px;
+}
+@media (min-width: 992px){
+  .card-service .icon{ width: 92px; height: 92px; }
+}
+
+
+
+/* Notícias */
+.card-news{
+  overflow:hidden; border:0; border-radius:16px;
+  box-shadow: 0 4px 18px rgba(15,23,42,.06);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.card-news:hover{transform: translateY(-4px); box-shadow: 0 14px 38px rgba(15,23,42,.12)}
+.card-news .card-img-top{aspect-ratio: 16/9; object-fit: cover}
+.card-news .badge{border-radius:999px}
+
+/* === CLIENTES: marquee com arraste === */
+.client{
+  width: 160px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+}
+.client img, .client svg{
+  max-height: 44px;
+  max-width: 140px;
+  height: auto !important;
+  width: auto !important;
+  display: block;
+  filter: grayscale(1) contrast(1.1) opacity(.85);
+  transition: filter .2s ease;
+}
+.client:hover img, .client:hover svg{ filter: none }
+
+/* container do marquee */
+.clients-marquee {
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.clients-marquee:active {
+  cursor: grabbing;
+}
+
+.clients-marquee .track {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
+.client {
+  width: 160px;
+  height: 60px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.client img,
+.client svg {
+  max-height: 44px;
+  max-width: 140px;
+  filter: grayscale(1) contrast(1.1) opacity(.85);
+  transition: filter .2s ease;
+}
+
+.client:hover img,
+.client:hover svg {
+  filter: none;
+}
+/* Cards de canais */
+.card-quick{
+  border:1px solid rgba(2,6,23,.06); padding:22px; border-radius:16px; text-decoration:none; color:inherit;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  background:#fff; display:flex; flex-direction:column; align-items:flex-start; gap:10px;
+}
+.card-quick i{font-size:1.6rem; color:var(--brand)}
+.card-quick:hover{
+  transform: translateY(-4px);
+  border-color: rgba(22,83,209,.28);
+  box-shadow: 0 12px 28px rgba(15,23,42,.08);
+}
+/* ===== Canais modernos ===== */
+.canal-card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:18px 14px;
+  border-radius:14px;
+  text-decoration:none;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(15,23,42,.08);
+  color: var(--ink);
+  transition: all .3s ease;
+  height:100%;
+}
+
+.canal-card img{
+  width:40px;
+  height:40px;
+  margin-bottom:12px;
+  transition: transform .3s ease;
+}
+
+.canal-card h3{
+  font-size:.95rem;
+  margin-bottom: 2px;
+}
+
+.canal-card span{
+  font-size:.8rem;
+  color:var(--muted);
+  margin-top:4px;
+  line-height:1.35;
+}
+
+.canal-card:hover{
+  background: linear-gradient(145deg, rgba(22,83,209,.15), rgba(255,255,255,0.15));
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(15,23,42,.1);
+}
+
+.canal-card:hover img{
+  transform: scale(1.08);
+}
+
+@media (prefers-color-scheme: dark){
+  .bg-soft{ background:#0e1525; }
+  .canal-card{ background: rgba(255,255,255,0.04); color:#e5e7eb; }
+  .canal-card span{ color:#9ca3af; }
+}
+/* Ícone composto (antisuborno) */
+.ico-stack{
+  position:relative; width:60px; height:60px;
+  display:inline-flex; align-items:center; justify-content:center;
+  margin-bottom:10px;
+}
+.ico-stack .base{ font-size:40px; line-height:1; }
+.ico-stack .slash{
+  position:absolute; font-size:38px; line-height:1;
+  color:#d11f2a; opacity:.95; /* destaque do "proibido" */
+}
+
+/* tamanho e cor padrão para TODOS os ícones (Bootstrap Icons) */
+.canal-card i.bi{
+  font-size: 38px;      /* aumente/diminua aqui (ex.: 36, 48, 56...) */
+  line-height: 1;
+  margin-bottom: 10px;
+  color: #ce4843;
+}
+
+/* compactação extra em telas pequenas */
+@media (max-width: 575.98px){
+  .canal-card{ padding:14px 12px; border-radius:12px; }
+  .canal-icon{ font-size:34px; margin-bottom:10px; }
+  .ico-stack{ width:34px; height:34px; }
+  .ico-stack .base{ font-size:34px; }
+  .ico-stack .slash{ font-size:32px; }
+  .canal-card h3{ font-size:.9rem; }
+  .canal-card span{ font-size:.78rem; }
+}
+
+/* modo escuro automático opcional */
+@media (prefers-color-scheme: dark){
+  .bg-soft{ background:#0e1525; }
+  .canal-card{ background: rgba(255,255,255,0.06); color:#e5e7eb; }
+  .canal-card span{ color:#9ca3af; }
+}
+/* ===================== CTA base (padrão único) ===================== */
+.cta{
+  position: relative;
+  padding: 22px 0;                     /* base compacta; varia por tipo */
+}
+.cta__container{
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Ícone consistente */
+.cta__icon i{
+  font-size: 28px;
+  line-height: 1;
+  display: inline-block;
+}
+
+/* Botões modernos (primário e outline) */
+.btn-cta{
+  --btn-bg: linear-gradient(135deg, #1653d1, #0f3fa2);
+  --btn-bg-hover: linear-gradient(135deg, #1249b8, #0c3487);
+  color:#fff;
+  background: var(--btn-bg);
+  border: 0;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(22,83,209,.25);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+  display: inline-flex; align-items: center; justify-content: center;
+  white-space: nowrap;
+}
+.btn-cta:hover{ background: var(--btn-bg-hover); transform: translateY(-1px); box-shadow: 0 10px 28px rgba(22,83,209,.35); }
+
+.btn-cta-outline{
+  color:#0f3fa2;
+  background: rgba(22,83,209,.08);
+  border: 1px solid rgba(22,83,209,.22);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.btn-cta-outline:hover{ background: rgba(22,83,209,.14); border-color: rgba(22,83,209,.35); transform: translateY(-1px); }
+
+/* ===================== Variações ===================== */
+/* Faixa do meio */
+.cta--strip{
+  background: linear-gradient(180deg, rgba(2,6,23,.04), rgba(2,6,23,.06));
+  border-top: 1px solid rgba(2,6,23,.08);
+  border-bottom: 1px solid rgba(2,6,23,.08);
+  padding: 18px 0;
+}
+.cta--strip .cta__icon{ color:#1653d1; }
+
+/* Final (primário) */
+.cta--primary{
+  color:#fff;
+  background: radial-gradient(1200px 600px at 15% 0%, rgba(255,255,255,.12), transparent 40%),
+              linear-gradient(135deg, #1653d1 0%, #0f3fa2 100%);
+  padding: 10px 0;
+}
+.cta--primary .cta__text h2{ color:#fff; }
+.cta--primary .cta__text p{ color: rgba(255,255,255,.9); }
+
+/* ===================== Responsivo ===================== */
+@media (max-width: 991.98px){
+  .cta__container{
+    grid-template-columns: 1fr;      /* empilha */
+    text-align: center;
+    gap: 12px;
+  }
+  .cta__actions{ display:flex; justify-content:center; }
+  .cta--primary{ padding: 28px 0; }
+  .cta__icon{ display:none; }        /* ícone some no mobile para ganhar espaço */
+  .btn-cta{ width: 100%; max-width: 520px; } /* botão grande e tocável */
+  .btn-cta-outline{ width: 100%; max-width: 420px; }
+  .cta--strip{ padding: 14px 0; }
+}
+
+/* Micro-ajustes de tipografia p/ telas pequenas */
+@media (max-width: 575.98px){
+  .cta--primary .cta__text h2{ font-size: clamp(1.2rem, 5.8vw, 1.6rem); }
+  .cta--primary .cta__text p{ font-size: .95rem; }
+}
+/* cartão discreto da marca */
+.footer-brand{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px;
+  border-radius:12px;
+  text-decoration:none;
+  background: rgba(255,255,255,.06);      /* glass leve */
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 8px rgba(15,23,42,.12);
+  transition: background .25s ease, box-shadow .25s ease, transform .2s ease;
+  margin-bottom: .75rem;                  /* substitui o .mb-3 que você usava */
+}
+
+/* logo em si */
+.footer-logo{
+  display:block;
+  height:46px;                            /* ajuste aqui o tamanho */
+  max-width: 220px;
+  object-fit: contain;
+  filter: grayscale(.2) contrast(1.05) opacity(.95);
+  transition: filter .25s ease, transform .2s ease;
+}
+
+/* hover bonito */
+.footer-brand:hover{
+  background: linear-gradient(145deg, rgba(22,83,209,.16), rgba(255,255,255,.14));
+  box-shadow: 0 12px 28px rgba(15,23,42,.20);
+  transform: translateY(-2px);
+}
+.footer-brand:hover .footer-logo{
+  filter: none;
+  transform: scale(1.02);
+}
+
+/* modo escuro do seu footer (se o fundo for bem escuro) */
+/* ===== Footer em texto claro ===== */
+.footer{
+  background: #0f1424;      /* seu azul bem escuro */
+  color: #ffffff;           /* texto padrão branco */
+}
+
+/* títulos, parágrafos e listas */
+.footer h6,
+.footer p,
+.footer li,
+.footer span,
+.footer small{
+  color: #d6d6d6;
+}
+
+/* links (normal e hover) */
+.footer a{
+  color: #e6edf7;           /* branco suave */
+  text-decoration: none;
+}
+.footer a:hover{
+  color: #ffffff;           /* branco total no hover */
+  text-decoration: underline;
+}
+
+/* ícones do Bootstrap herdam a cor */
+.footer .bi{
+  color: inherit;
+}
+
+/* “text-secondary” dentro do footer também fica claro */
+.footer .text-secondary{
+  color: #cfe0ff !important;  /* tom claro para subtítulos/legendas */
+}
+
+/* linha divisória mais sutil no tema escuro */
+.footer .border-top{
+  border-top-color: rgba(255,255,255,.15) !important;
+}
+
+/* Helpers responsivos */
+@media (max-width: 991.98px){
+  .hero{min-height: 72vh; background-attachment: scroll}
+}
+/* Cards do protofolio - ler mais... */
+.card-text-limit {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* número de linhas visíveis */
+  -webkit-box-orient: vertical;
+  min-height: 4.5em; /* mantém alinhado */
+}
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.card:hover img {
+  transform: scale(1.05);
+  transition: transform 0.4s ease;
+}
+
+.read-more {
+  color: var(--bs-primary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.read-more:hover {
+  text-decoration: underline;
+}
+
+/* SOBRE NOS */
+
+/* === Hover cards e imagens (Quem Somos / Portfólio) === */
+.hover-card, .hover-img {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.hover-card:hover, .hover-img:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  filter: brightness(1.05);
+}
+@media (hover: none) {
+  .hover-card:hover, .hover-img:hover {
+    transform: none;
+    box-shadow: none;
+    filter: none;
+  }
+}
+/* mesma largura visual para imagens “soltas” da página */
+.media-eq{
+  display:block;
+  width:100%;
+  max-width: 200px;           /* ajuste aqui: 640 / 680 / 720 etc. */
+  margin-inline: auto;        /* centraliza */
+  height:auto;
+}
+@media (max-width: 991.98px){ .media-eq{ max-width: 560px; } }
+@media (max-width: 575.98px){ .media-eq{ max-width: 100%; } }

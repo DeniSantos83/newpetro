@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SAGIP — Painel</title>
+  <meta name="description" content="Painel do sistema SAGIP" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- jsPDF + autotable p/ relatório PDF -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            petroeng: {
+              headerFrom: '#4FCAFF',   /* roxo escuro do topo */
+              headerTo:   '#004C6E',   /* roxo/indigo do topo */
+              bar:        '#9E0000',   /* faixa */
+              badgeRed:   '#e11d48',
+              badgeBlue:  '#2563eb',
+              badgeGreen: '#16a34a',
+              badgeYellow:'#eab308',
+              badgeGray:  '#64748b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .thin-scroll::-webkit-scrollbar { height: 8px; width: 8px; }
+    .thin-scroll::-webkit-scrollbar-thumb { background: #c7cbe0; border-radius: 8px; }
+    .thin-scroll::-webkit-scrollbar-track { background: transparent; }
+
+    .grid-table th, .grid-table td { border-right: 1px solid rgba(148,163,184,.25); white-space: nowrap; }
+    .grid-table tr:hover td { background: rgba(59,130,246,.06); }
+
+    .skeleton { position: relative; overflow: hidden; background: #e5e7eb; }
+    .skeleton::after {
+      content: ""; position: absolute; inset: 0; transform: translateX(-100%);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.6), transparent);
+      animation: shimmer 1.2s infinite;
+    }
+    @keyframes shimmer { 100% { transform: translateX(100%); } }
+
+    .dark .grid-table tr:hover td { background: rgba(148,163,184,.12); }
+    .dark .skeleton { background: #1f2937; }
+
+    /* Dropzone */
+    .drop-accept { border-color: #16a34a !important; background: rgba(22,163,74,.06) !important; }
+    .drop-reject { border-color: #e11d48 !important; background: rgba(225,29,72,.06) !important; }
+  </style>
+</head>
+<body class="bg-slate-100 dark:bg-slate-900 min-h-screen text-slate-800 dark:text-slate-100">
+
+  <!-- HEADER -->
+  <header class="w-full bg-gradient-to-r from-petroeng-headerFrom to-petroeng-headerTo text-white shadow">
+    <div class="max-w-[1400px] mx-auto px-4">
+      <div class="flex items-center justify-between py-2 gap-4">
+        <div class="flex items-center gap-3">
+          <img src="img/logopetroengtranspa.png" alt="Petroeng" class="h-10">
+          <div class="hidden sm:flex items-center gap-2 text-xs">
+            <img src="img//sagip-logo-transparent.png" alt="Petroeng" class="h-10">
+            <span class="opacity-90">SAGIP</span><span class="opacity-40">|</span><span class="opacity-90">ADM/HR/FIN/SGI/GED</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="hidden md:flex items-center bg-white/10 rounded-lg px-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-4.35-4.35M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z"/></svg>
+            <input id="buscaTopo" type="text" placeholder="Busca rápida..." class="bg-transparent text-sm px-2 py-1 outline-none placeholder-white/60">
+          </div>
+          <button id="darkToggle" class="bg-white/10 hover:bg-white/20 text-xs rounded-md px-3 py-1.5">Dark</button>
+          <div class="flex items-center gap-2 bg-white/10 rounded-lg px-2 py-1">
+            <img src="img/sagip-icon.png" alt="SAGIP" class="h-6">
+            <span class="text-xs">deni.santos</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center justify-between py-2 text-xs border-t border-white/15">
+        <nav class="flex items-center gap-2">
+          <a class="opacity-90 hover:opacity-100" href="#">Início</a><span class="opacity-40">/</span>
+          <a class="opacity-90 hover:opacity-100" href="#">GED</a><span class="opacity-40">/</span>
+          <span class="opacity-100 font-semibold">Buscar / Upload</span>
+        </nav>
+        <div class="flex items-center gap-2">
+          <button class="bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-md">Preferências</button>
+          <button class="bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-md">Ajuda</button>
+          <button id="logoutBtn" class="bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-md">Sair</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-[1400px] mx-auto px-3 md:px-4 py-4 md:py-6">
+
+    <!-- KPIs -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+      <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200/70 dark:border-slate-700 p-4">
+        <div class="text-xs text-slate-500 dark:text-slate-400">Total</div><div class="text-2xl font-bold" id="kpiTotal">0</div>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200/70 dark:border-slate-700 p-4">
+        <div class="text-xs text-slate-500 dark:text-slate-400">Em vigor</div><div class="text-2xl font-bold text-petroeng-badgeBlue" id="kpiVigor">0</div>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200/70 dark:border-slate-700 p-4">
+        <div class="text-xs text-slate-500 dark:text-slate-400">Revisões</div><div class="text-2xl font-bold text-petroeng-badgeYellow" id="kpiRev">0</div>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200/70 dark:border-slate-700 p-4">
+        <div class="text-xs text-slate-500 dark:text-slate-400">Vencidos</div><div class="text-2xl font-bold text-petroeng-badgeRed" id="kpiVenc">0</div>
+      </div>
+    </section>
+
+    <div class="grid grid-cols-12 gap-3 md:gap-4">
+      <!-- SIDENAV -->
+      <aside class="col-span-12 md:col-span-3 lg:col-span-2 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+        <div class="bg-slate-50 dark:bg-slate-700/40 px-3 py-2 text-xs font-semibold border-b border-slate-200 dark:border-slate-700">Navegação</div>
+        <nav class="p-2 text-sm leading-6 thin-scroll max-h-[70vh] overflow-auto">
+          <details open class="group">
+            <summary class="cursor-pointer px-2 py-1.5 rounded hover:bg-slate-50 dark:hover:bg-slate-700/40 font-medium">Módulos</summary>
+            <ul class="ml-3 my-1 space-y-0.5">
+              <li><a class="block px-2 py-1 rounded hover:bg-slate-50 dark:hover:bg-slate-700/40" href="#">Administração</a></li>
+              <li><a class="block px-2 py-1 rounded hover:bg-slate-50 dark:hover:bg-slate-700/40" href="#">Recursos Humanos</a></li>
+              <li><a class="block px-2 py-1 rounded hover:bg-slate-50 dark:hover:bg-slate-700/40" href="#">Financeiro</a></li>
+              <li><a class="block px-2 py-1 rounded hover:bg-slate-50 dark:hover:bg-slate-700/40" href="#">SGI</a></li>
+              <li class="font-semibold text-petroeng-headerTo"><a class="block px-2 py-1 rounded hover:bg-slate-50 dark:hover:bg-slate-700/40" href="#">GED</a></li>
+            </ul>
+          </details>
+
+          <details open class="group mt-2">
+            <summary class="cursor-pointer px-2 py-1.5 rounded hover:bg-slate-50 dark:hover:bg-slate-700/40 font-medium">GED</summary>
+            <ul class="ml-3 my-1 space-y-0.5">
+              <li><a class="block px-2 py-1 rounded bg-slate-100 dark:bg-slate-700/50" href="#">Buscar documentos</a></li>
+              <li><a class="block px-2 py-1 rounded hover:bg-slate-50 dark:hover:bg-slate-700/40" href="#upload">Upload / Novo</a></li>
+              <li><a class="block px-2 py-1 rounded hover:bg-slate-50 dark:hover:bg-slate-700/40" href="#">Meus favoritos</a></li>
+            </ul>
+          </details>
+        </nav>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="col-span-12 md:col-span-9 lg:col-span-10 space-y-4">
+
+        <!-- FILTROS -->
+        <section class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+          <div class="px-4 py-3 border-b bg-slate-50 dark:bg-slate-700/40 rounded-t-xl">
+            <h2 class="text-sm font-semibold">Buscar Documentos</h2>
+          </div>
+
+          <div class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-3">
+            <div><label class="text-xs text-slate-600 dark:text-slate-300">Unidade</label>
+              <select id="fUnidade" class="w-full mt-1 px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg">
+                <option>SEDE</option><option>AL</option><option>BA</option><option>PE</option>
+              </select>
+            </div>
+            <div><label class="text-xs text-slate-600 dark:text-slate-300">Área</label>
+              <select id="fArea" class="w-full mt-1 px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg">
+                <option>Todas</option><option>SGI</option><option>Compliance</option><option>RH</option>
+              </select>
+            </div>
+            <div><label class="text-xs text-slate-600 dark:text-slate-300">Tipo</label>
+              <select id="fTipo" class="w-full mt-1 px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg">
+                <option>Todos</option><option>Procedimento</option><option>Instrução</option><option>Política</option>
+              </select>
+            </div>
+            <div><label class="text-xs text-slate-600 dark:text-slate-300">Período (início)</label>
+              <input id="fIni" type="date" class="w-full mt-1 px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg" />
+            </div>
+            <div><label class="text-xs text-slate-600 dark:text-slate-300">Período (fim)</label>
+              <input id="fFim" type="date" class="w-full mt-1 px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg" />
+            </div>
+            <div><label class="text-xs text-slate-600 dark:text-slate-300">Palavra-chave</label>
+              <input id="fTexto" type="text" placeholder="ex.: PC 113" class="w-full mt-1 px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg" />
+            </div>
+          </div>
+
+          <!-- TOOLBAR -->
+          <div class="px-4 pb-4 flex flex-wrap items-center gap-2">
+            <button id="btnBuscar" class="px-4 py-2 rounded-lg bg-petroeng-bar text-white text-sm font-semibold hover:opacity-90">Buscar</button>
+            <button id="btnLimpar" class="px-3 py-2 rounded-lg border text-sm dark:border-slate-600">Limpar</button>
+            <div class="ml-auto flex items-center gap-2">
+              <button id="btnSalvarBusca" class="px-3 py-2 rounded-lg border text-sm dark:border-slate-600">Salvar busca</button>
+              <button id="btnExportCsv" class="px-3 py-2 rounded-lg border text-sm dark:border-slate-600">Exportar CSV</button>
+              <button id="btnPdf" class="px-3 py-2 rounded-lg border text-sm dark:border-slate-600">Relatório PDF</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- RESULTADOS -->
+        <section class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+          <div class="px-4 py-3 border-b bg-slate-50 dark:bg-slate-700/40 flex items-center justify-between">
+            <h3 class="text-sm font-semibold">Documentos</h3>
+            <div class="text-xs text-slate-500 dark:text-slate-300"><span id="count">0</span> itens</div>
+          </div>
+
+          <div class="overflow-auto thin-scroll">
+            <table class="min-w-[900px] w-full text-xs grid-table">
+              <thead class="bg-slate-50 dark:bg-slate-900/50 text-slate-600 dark:text-slate-300">
+                <tr>
+                  <th class="text-left px-3 py-2 cursor-pointer sort" data-key="cod">Código</th>
+                  <th class="text-left px-3 py-2 cursor-pointer sort" data-key="titulo">Título</th>
+                  <th class="text-left px-3 py-2 cursor-pointer sort" data-key="area">Área</th>
+                  <th class="text-left px-3 py-2 cursor-pointer sort" data-key="versao">Versão</th>
+                  <th class="text-left px-3 py-2 cursor-pointer sort" data-key="status">Status</th>
+                  <th class="text-left px-3 py-2 cursor-pointer sort" data-key="validade">Validade</th>
+                  <th class="text-left px-3 py-2">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tbody" class="divide-y dark:divide-slate-700"></tbody>
+            </table>
+          </div>
+
+          <!-- PAGINAÇÃO + LEGENDA -->
+          <div class="px-4 py-3 bg-slate-50 dark:bg-slate-700/40 border-t dark:border-slate-700 flex items-center justify-between">
+            <div class="flex flex-wrap items-center gap-4 text-[11px]">
+              <span class="inline-flex items-center gap-1"><i class="w-3 h-3 rounded-sm bg-petroeng-badgeBlue"></i> Em vigor</span>
+              <span class="inline-flex items-center gap-1"><i class="w-3 h-3 rounded-sm bg-petroeng-badgeYellow"></i> Revisão pendente</span>
+              <span class="inline-flex items-center gap-1"><i class="w-3 h-3 rounded-sm bg-petroeng-badgeRed"></i> Vencido</span>
+              <span class="inline-flex items-center gap-1"><i class="w-3 h-3 rounded-sm bg-petroeng-badgeGreen"></i> Novo</span>
+              <span class="inline-flex items-center gap-1"><i class="w-3 h-3 rounded-sm bg-petroeng-badgeGray"></i> Arquivado</span>
+            </div>
+            <div class="flex items-center gap-2 text-xs">
+              <button id="prev" class="px-2 py-1 border rounded disabled:opacity-40 dark:border-slate-600">&larr;</button>
+              <span id="pageInfo">1 / 1</span>
+              <button id="next" class="px-2 py-1 border rounded disabled:opacity-40 dark:border-slate-600">&rarr;</button>
+              <select id="pageSize" class="ml-2 px-2 py-1 border rounded dark:bg-slate-900 dark:border-slate-600">
+                <option>5</option><option selected>10</option><option>20</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <!-- UPLOAD / NOVO -->
+        <section id="upload" class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+          <div class="px-4 py-3 border-b bg-slate-50 dark:bg-slate-700/40 rounded-t-xl flex items-center justify-between">
+            <h3 class="text-sm font-semibold">Upload / Novo (Demo)</h3>
+            <span class="text-xs text-slate-500">Arraste arquivos ou selecione</span>
+          </div>
+
+          <div class="p-4 grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <!-- DROPZONE -->
+            <div class="lg:col-span-2">
+              <div id="drop" class="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-xl p-6 text-center bg-slate-50/50 dark:bg-slate-900/30">
+                <p class="mb-2 text-sm">Solte aqui arquivos <b>PDF, DOCX, XLSX</b></p>
+                <input id="fileInput" type="file" multiple accept=".pdf,.docx,.xlsx" class="hidden">
+                <button id="pickFiles" class="px-3 py-2 rounded-lg border text-sm dark:border-slate-600">Selecionar arquivos</button>
+              </div>
+
+              <!-- LISTA DE ARQUIVOS -->
+              <div id="fileList" class="mt-4 hidden">
+                <div class="text-xs mb-2 text-slate-500">Arquivos prontos para enviar</div>
+                <table class="w-full text-xs border rounded overflow-hidden">
+                  <thead class="bg-slate-50 dark:bg-slate-900/50">
+                    <tr><th class="text-left px-2 py-1">Arquivo</th><th class="text-left px-2 py-1">Detectado</th><th class="px-2 py-1">Tamanho</th><th class="px-2 py-1">Ação</th></tr>
+                  </thead>
+                  <tbody id="fileRows"></tbody>
+                </table>
+
+                <div class="flex items-center gap-2 mt-3">
+                  <button id="btnEnviar" class="px-4 py-2 rounded-lg bg-petroeng-bar text-white text-sm font-semibold hover:opacity-90">Enviar</button>
+                  <div id="upMsg" class="text-xs text-slate-500"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- METADADOS -->
+            <div class="space-y-3">
+              <div>
+                <label class="text-xs text-slate-600 dark:text-slate-300">Área</label>
+                <select id="uArea" class="w-full mt-1 px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg">
+                  <option>SGI</option><option>Compliance</option><option>RH</option><option>Financeiro</option><option>Administração</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-xs text-slate-600 dark:text-slate-300">Tipo</label>
+                <select id="uTipo" class="w-full mt-1 px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg">
+                  <option>Procedimento</option><option>Instrução</option><option>Política</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-xs text-slate-600 dark:text-slate-300">Unidade</label>
+                <select id="uUnidade" class="w-full mt-1 px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg">
+                  <option>SEDE</option><option>AL</option><option>BA</option><option>PE</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-xs text-slate-600 dark:text-slate-300">Validade</label>
+                <input id="uVal" type="date" class="w-full mt-1 px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg">
+              </div>
+              <p class="text-[11px] text-slate-500">Dica: se o nome do arquivo contiver algo como <b>PC-113</b> ou <b>SGI-009</b>, tentamos detectar o código automaticamente.</p>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- MODAL PREVIEW -->
+  <div id="modal" class="fixed inset-0 hidden items-center justify-center bg-black/50 z-50">
+    <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg max-w-2xl w-[95%] p-4">
+      <div class="flex items-center justify-between border-b dark:border-slate-700 pb-2 mb-3">
+        <h4 id="mTitle" class="text-sm font-semibold">Detalhes</h4>
+        <button id="mClose" class="px-2 py-1 border rounded text-xs dark:border-slate-600">Fechar</button>
+      </div>
+      <div id="mBody" class="text-sm space-y-2"></div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="fixed bottom-4 left-1/2 -translate-x-1/2 hidden bg-black text-white text-sm px-4 py-2 rounded-lg shadow-lg">OK</div>
+
+  <script>
+    // ------------------ DATA (demo) ------------------
+    const docsBase = [
+      { cod: 'PC-113', titulo: 'Política Antissuborno', tipo:'Política', area: 'SGI', versao: '1.4', status: 'Em vigor',   validade: '2026-12-31', unidade:'SEDE' },
+      { cod: 'PC-101', titulo: 'Relacionamento com o Poder Público', tipo:'Procedimento', area: 'Compliance', versao: '2.1', status: 'Revisão pendente', validade: '2025-02-15', unidade:'SEDE' },
+      { cod: 'PC-107', titulo: 'Canal de Compliance', tipo:'Procedimento', area: 'Compliance', versao: '1.2', status: 'Novo',     validade: '', unidade:'BA' },
+      { cod: 'PC-103', titulo: 'Brindes, Presentes e Hospitalidades', tipo:'Instrução', area: 'Compliance', versao: '3.0', status: 'Vencido',   validade: '2024-09-30', unidade:'SEDE' },
+      { cod: 'RH-022', titulo: 'Instrução de Admissão', tipo:'Instrução', area: 'RH', versao: '1.9', status: 'Arquivado', validade: '', unidade:'AL' },
+      { cod: 'SGI-009', titulo: 'Gestão de Riscos', tipo:'Procedimento', area: 'SGI', versao: '2.0', status: 'Em vigor', validade: '2027-05-10', unidade:'PE' },
+      { cod: 'FIN-031', titulo: 'Adiantamentos e Reembolsos', tipo:'Procedimento', area: 'Financeiro', versao: '1.3', status: 'Em vigor', validade: '2026-01-20', unidade:'SEDE' },
+      { cod: 'RH-040', titulo: 'Política de Home Office', tipo:'Política', area: 'RH', versao: '1.0', status: 'Revisão pendente', validade: '2025-06-01', unidade:'SEDE' },
+      { cod: 'ADM-014', titulo: 'Solicitação de Compras', tipo:'Procedimento', area: 'Administração', versao: '4.2', status: 'Em vigor', validade: '2027-11-03', unidade:'SEDE' },
+      { cod: 'SGI-021', titulo: 'Auditorias Internas', tipo:'Procedimento', area: 'SGI', versao: '3.1', status: 'Em vigor', validade: '2026-03-14', unidade:'BA' },
+      { cod: 'SGI-022', titulo: 'Controle de Documentos', tipo:'Procedimento', area: 'SGI', versao: '2.5', status: 'Revisão pendente', validade: '2025-12-31', unidade:'SEDE' },
+      { cod: 'PC-150', titulo: 'Relacionamento com Fornecedores', tipo:'Política', area: 'Compliance', versao: '1.1', status: 'Em vigor', validade: '2026-09-09', unidade:'PE' }
+    ];
+
+    // ------------------ STATE ------------------
+    let docs = [...docsBase];
+    let view = [];
+    let page = 1;
+    let pageSize = 10;
+    let sortKey = 'cod';
+    let sortDir = 'asc';
+    const favKey = 'sagip_favs';
+    let favs = new Set(JSON.parse(localStorage.getItem(favKey) || '[]'));
+
+    // ------------------ UTILS ------------------
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => document.querySelectorAll(sel);
+    const fmtDate = iso => iso ? new Date(iso+'T00:00:00').toLocaleDateString() : '—';
+    const toast = (msg) => { const t = $('#toast'); t.textContent = msg; t.classList.remove('hidden'); setTimeout(()=> t.classList.add('hidden'), 1800); }
+    const badgeMap = {
+      'Em vigor':        'bg-petroeng-badgeBlue text-white',
+      'Revisão pendente':'bg-petroeng-badgeYellow text-slate-900',
+      'Vencido':         'bg-petroeng-badgeRed text-white',
+      'Novo':            'bg-petroeng-badgeGreen text-white',
+      'Arquivado':       'bg-petroeng-badgeGray text-white'
+    };
+
+    // ------------------ RENDER LIST ------------------
+    function applyFilters() {
+      const unidade = $('#fUnidade').value;
+      const area = $('#fArea').value;
+      const tipo = $('#fTipo').value;
+      const kw = ($('#fTexto').value || '').toLowerCase();
+      const ini = $('#fIni').value ? new Date($('#fIni').value) : null;
+      const fim = $('#fFim').value ? new Date($('#fFim').value) : null;
+
+      view = docs.filter(d => {
+        if (unidade !== 'SEDE' && d.unidade !== unidade) return false;
+        if (area !== 'Todas' && d.area !== area) return false;
+        if (tipo !== 'Todos' && d.tipo !== tipo) return false;
+        if (kw && !(`${d.cod} ${d.titulo} ${d.area}`.toLowerCase().includes(kw))) return false;
+        if (ini && d.validade && new Date(d.validade) < ini) return false;
+        if (fim && d.validade && new Date(d.validade) > fim) return false;
+        return true;
+      });
+
+      sortView();
+      page = 1;
+      renderTable();
+      renderKpis();
+    }
+
+    function sortView() {
+      view.sort((a,b)=>{
+        let va = a[sortKey] ?? '', vb = b[sortKey] ?? '';
+        if (sortKey === 'validade') { va = va || '9999-12-31'; vb = vb || '9999-12-31'; }
+        if (va < vb) return sortDir === 'asc' ? -1 : 1;
+        if (va > vb) return sortDir === 'asc' ? 1 : -1;
+        return 0;
+      });
+    }
+
+    function renderKpis() {
+      $('#kpiTotal').textContent = view.length;
+      $('#kpiVigor').textContent = view.filter(d=>d.status==='Em vigor').length;
+      $('#kpiVenc').textContent  = view.filter(d=>d.status==='Vencido').length;
+      $('#kpiRev').textContent   = view.filter(d=>d.status==='Revisão pendente').length;
+    }
+
+    function renderTable() {
+      const tbody = $('#tbody'); tbody.innerHTML = '';
+      const start = (page-1)*pageSize;
+      const slice = view.slice(start, start+pageSize);
+
+      slice.forEach(d=>{
+        const tr = document.createElement('tr');
+        tr.className = 'odd:bg-white even:bg-slate-50/40 dark:odd:bg-slate-800 dark:even:bg-slate-800/60';
+        const favOn = favs.has(d.cod);
+        tr.innerHTML = `
+          <td class="px-3 py-2 font-medium">${d.cod}</td>
+          <td class="px-3 py-2">${d.titulo}</td>
+          <td class="px-3 py-2">${d.area}</td>
+          <td class="px-3 py-2">${d.versao}</td>
+          <td class="px-3 py-2"><span class="px-2 py-0.5 rounded text-[10px] ${badgeMap[d.status]}">${d.status}</span></td>
+          <td class="px-3 py-2">${fmtDate(d.validade)}</td>
+          <td class="px-3 py-2 flex items-center gap-3">
+            <button class="text-blue-600 dark:text-blue-400 hover:underline" data-open="${d.cod}">Abrir</button>
+            <button class="text-slate-600 dark:text-slate-300 hover:underline" data-hist="${d.cod}">Histórico</button>
+            <button class="favBtn" data-fav="${d.cod}" title="Favoritar" aria-label="Favoritar">${favOn ? '⭐' : '☆'}</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      $('#count').textContent = view.length;
+      const totalPages = Math.max(1, Math.ceil(view.length / pageSize));
+      $('#pageInfo').textContent = `${page} / ${totalPages}`;
+      $('#prev').disabled = page <= 1;
+      $('#next').disabled = page >= totalPages;
+    }
+
+    function skeletonRows() {
+      const tbody = $('#tbody'); tbody.innerHTML = '';
+      for (let i=0;i<6;i++){
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td class="px-3 py-2"><div class="h-3 w-20 rounded skeleton"></div></td>
+                        <td class="px-3 py-2"><div class="h-3 w-64 rounded skeleton"></div></td>
+                        <td class="px-3 py-2"><div class="h-3 w-24 rounded skeleton"></div></td>
+                        <td class="px-3 py-2"><div class="h-3 w-10 rounded skeleton"></div></td>
+                        <td class="px-3 py-2"><div class="h-3 w-20 rounded skeleton"></div></td>
+                        <td class="px-3 py-2"><div class="h-3 w-16 rounded skeleton"></div></td>
+                        <td class="px-3 py-2"><div class="h-3 w-24 rounded skeleton"></div></td>`;
+        tbody.appendChild(tr);
+      }
+    }
+
+    // ------------------ EVENTS: topo/toolbar/tabela ------------------
+    $('#logoutBtn').addEventListener('click', ()=> location.href='index.html');
+    const dmKey = 'sagip_dark';
+    if (localStorage.getItem(dmKey)==='1') document.documentElement.classList.add('dark');
+    $('#darkToggle').addEventListener('click', ()=>{
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem(dmKey, document.documentElement.classList.contains('dark') ? '1' : '0');
+    });
+
+    $('#btnBuscar').addEventListener('click', ()=>{ skeletonRows(); setTimeout(()=>{ applyFilters(); toast('Resultados atualizados'); }, 700); });
+    $('#btnLimpar').addEventListener('click', ()=>{
+      $('#fUnidade').value = 'SEDE'; $('#fArea').value = 'Todas'; $('#fTipo').value = 'Todos';
+      $('#fIni').value = ''; $('#fFim').value = ''; $('#fTexto').value = ''; applyFilters();
+    });
+
+    $$('.sort').forEach(th=>{
+      th.addEventListener('click', ()=>{
+        const key = th.dataset.key; sortKey = key; sortDir = (sortDir==='asc') ? 'desc' : 'asc';
+        sortView(); renderTable();
+      });
+    });
+
+    $('#prev').addEventListener('click', ()=>{ if(page>1){ page--; renderTable(); } });
+    $('#next').addEventListener('click', ()=>{
+      const totalPages = Math.max(1, Math.ceil(view.length / pageSize));
+      if(page<totalPages){ page++; renderTable(); }
+    });
+    $('#pageSize').addEventListener('change', (e)=>{ pageSize = +e.target.value; page=1; renderTable(); });
+    $('#tbody').addEventListener('click', (e)=>{
+      const open = e.target.getAttribute('data-open');
+      const hist = e.target.getAttribute('data-hist');
+      const fav  = e.target.getAttribute('data-fav');
+      if (open) {
+        const d = docs.find(x=>x.cod===open);
+        $('#mTitle').textContent = `${d.cod} — ${d.titulo}`;
+        $('#mBody').innerHTML = `
+          <div><b>Área:</b> ${d.area}</div><div><b>Tipo:</b> ${d.tipo}</div>
+          <div><b>Versão:</b> ${d.versao}</div><div><b>Status:</b> ${d.status}</div>
+          <div><b>Validade:</b> ${fmtDate(d.validade)}</div><div><b>Unidade:</b> ${d.unidade}</div>
+          <div class="pt-2 text-slate-500 dark:text-slate-400 text-xs">* Pré-visualização de metadados. (Demo)</div>`;
+        $('#modal').classList.remove('hidden','opacity-0'); $('#modal').classList.add('flex');
+      }
+      if (hist) { toast(`Exibindo histórico de ${hist} (demo)`); }
+      if (fav) { if (favs.has(fav)) favs.delete(fav); else favs.add(fav); localStorage.setItem(favKey, JSON.stringify([...favs])); renderTable(); }
+    });
+    $('#mClose').addEventListener('click', ()=> $('#modal').classList.add('hidden'));
+    $('#modal').addEventListener('click', (e)=>{ if(e.target.id==='modal') $('#modal').classList.add('hidden'); });
+
+    $('#btnSalvarBusca').addEventListener('click', ()=>{
+      const payload = { unidade: $('#fUnidade').value, area: $('#fArea').value, tipo: $('#fTipo').value, ini: $('#fIni').value, fim: $('#fFim').value, texto: $('#fTexto').value };
+      localStorage.setItem('sagip_busca_salva', JSON.stringify(payload));
+      toast('Busca salva');
+    });
+
+    $('#btnExportCsv').addEventListener('click', ()=>{
+      const rows = [['Código','Título','Área','Tipo','Versão','Status','Validade','Unidade']];
+      view.forEach(d=> rows.push([d.cod,d.titulo,d.area,d.tipo,d.versao,d.status,fmtDate(d.validade),d.unidade]));
+      const csv = rows.map(r=> r.map(v=> `"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+      const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'}); const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'documentos.csv'; a.click(); URL.revokeObjectURL(url);
+      toast('CSV exportado');
+    });
+
+    // PDF
+    $('#btnPdf').addEventListener('click', ()=>{
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+      const title = 'Relatório de Documentos — SAGIP';
+      doc.setFont('helvetica','bold'); doc.setFontSize(14);
+      doc.text(title, 40, 40);
+      doc.setFontSize(10); doc.setFont('helvetica','normal');
+      const filtros = `Unidade: ${$('#fUnidade').value}  |  Área: ${$('#fArea').value}  |  Tipo: ${$('#fTipo').value}  |  Palavra: "${$('#fTexto').value || '-'}"`;
+      doc.text(filtros, 40, 58);
+      const rows = view.map(d=> [d.cod, d.titulo, d.area, d.tipo, d.versao, d.status, fmtDate(d.validade), d.unidade]);
+      doc.autoTable({
+        startY: 74,
+        head: [['Código','Título','Área','Tipo','Versão','Status','Validade','Unidade']],
+        body: rows,
+        styles: { fontSize: 8 },
+        headStyles: { fillColor: [59,42,111] }, // roxo do header
+        margin: { left: 40, right: 40 },
+        didDrawPage: (data) => {
+          const pageCount = doc.getNumberOfPages();
+          doc.setFontSize(8);
+          doc.text(`Página ${data.pageNumber} / ${pageCount}`, 40, doc.internal.pageSize.height - 20);
+        }
+      });
+      doc.save('relatorio-sagip.pdf');
+      toast('PDF gerado');
+    });
+
+    // Busca rápida do topo
+    $('#buscaTopo').addEventListener('input', (e)=>{ $('#fTexto').value = e.target.value; applyFilters(); });
+
+    // ------------------ UPLOAD / NOVO ------------------
+    const drop = $('#drop');
+    const fileInput = $('#fileInput');
+    const pickFiles = $('#pickFiles');
+    const fileList = $('#fileList');
+    const fileRows = $('#fileRows');
+    const upMsg = $('#upMsg');
+    const acceptExt = ['pdf','docx','xlsx'];
+    let queue = []; // arquivos aguardando envio
+
+    function parseMetaFromName(name) {
+      // Tenta achar código tipo "PC-113" ou "SGI-009" no nome
+      const m = name.toUpperCase().match(/([A-Z]{2,4})-(\d{2,3})/);
+      return m ? `${m[1]}-${m[2]}` : '';
+    }
+
+    function addToQueue(files) {
+      [...files].forEach(f=>{
+        const ext = f.name.split('.').pop().toLowerCase();
+        const ok = acceptExt.includes(ext);
+        const code = parseMetaFromName(f.name);
+        const size = (f.size/1024/1024).toFixed(2)+' MB';
+        const id = crypto.randomUUID();
+        queue.push({ id, file:f, ext, ok, code, size });
+      });
+      renderQueue();
+    }
+
+    function renderQueue() {
+      fileRows.innerHTML = '';
+      if (!queue.length) { fileList.classList.add('hidden'); return; }
+      fileList.classList.remove('hidden');
+      queue.forEach(item=>{
+        const tr = document.createElement('tr');
+        tr.className = 'border-t';
+        tr.innerHTML = `
+          <td class="px-2 py-1">${item.file.name}</td>
+          <td class="px-2 py-1">${item.code || '—'}</td>
+          <td class="px-2 py-1 text-center">${item.size}</td>
+          <td class="px-2 py-1 text-center">
+            ${item.ok ? '<span class="text-green-600 text-xs">OK</span>' : '<span class="text-rose-600 text-xs">Inválido</span>'}
+            <button data-del="${item.id}" class="ml-2 text-rose-600 hover:underline">remover</button>
+          </td>`;
+        fileRows.appendChild(tr);
+      });
+    }
+
+    pickFiles.addEventListener('click', ()=> fileInput.click());
+    fileInput.addEventListener('change', (e)=> addToQueue(e.target.files));
+
+    ;['dragenter','dragover'].forEach(evt => drop.addEventListener(evt, e=>{
+      e.preventDefault(); e.stopPropagation();
+      drop.classList.add('drop-accept');
+    }));
+    ;['dragleave','drop'].forEach(evt => drop.addEventListener(evt, e=>{
+      e.preventDefault(); e.stopPropagation();
+      drop.classList.remove('drop-accept','drop-reject');
+    }));
+    drop.addEventListener('drop', (e)=>{
+      const files = e.dataTransfer.files; addToQueue(files);
+    });
+
+    fileRows.addEventListener('click', (e)=>{
+      const id = e.target.getAttribute('data-del');
+      if (!id) return;
+      queue = queue.filter(q=> q.id !== id);
+      renderQueue();
+    });
+
+    // Enviar (simulação com barra de progresso e inclusão no grid)
+    $('#btnEnviar').addEventListener('click', async ()=>{
+      if (!queue.length) { upMsg.textContent = 'Nenhum arquivo na fila.'; return; }
+      const invalid = queue.filter(q=> !q.ok);
+      if (invalid.length) { upMsg.textContent = 'Remova arquivos inválidos antes de enviar.'; return; }
+
+      // cria barra de progresso
+      upMsg.innerHTML = `
+        <div class="w-full bg-slate-200 dark:bg-slate-700 rounded h-2 overflow-hidden">
+          <div id="prog" class="h-2 bg-petroeng-bar" style="width:0%"></div>
+        </div>
+        <div id="progText" class="text-[11px] mt-1 text-slate-500">0%</div>
+      `;
+      const prog = $('#prog'), progText = $('#progText');
+
+      const meta = {
+        area: $('#uArea').value, tipo: $('#uTipo').value, unidade: $('#uUnidade').value,
+        validade: $('#uVal').value
+      };
+
+      // Simula upload progressivo e "criação" do documento
+      for (let i=0;i<queue.length;i++){
+        const q = queue[i];
+        for (let p=0;p<=100;p+=10){
+          await new Promise(r=> setTimeout(r, 60));
+          prog.style.width = Math.round(((i + p/100)/queue.length)*100) + '%';
+          progText.textContent = Math.round(((i + p/100)/queue.length)*100) + '%';
+        }
+        const cod = q.code || `${meta.tipo.substring(0,3).toUpperCase()}-${Math.floor(100+Math.random()*900)}`;
+        const novo = {
+          cod,
+          titulo: q.file.name.replace(/\.[^/.]+$/, ''),
+          tipo: meta.tipo,
+          area: meta.area,
+          versao: '1.0',
+          status: 'Novo',
+          validade: meta.validade || '',
+          unidade: meta.unidade
+        };
+        docs.unshift(novo); // adiciona no topo
+      }
+
+      queue = []; renderQueue(); upMsg.textContent = 'Upload concluído (demo).';
+      applyFilters(); toast('Arquivos enviados e cadastrados');
+    });
+
+    // ------------------ INIT ------------------
+    applyFilters();
+  </script>
+</body>
+</html>
