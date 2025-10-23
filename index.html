@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="max-age=31536000, must-revalidate">
+  <title>Petroeng Engenharia</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="img/favicon.jpg" type="image/png">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- AOS Animation -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-transparent">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">
+      <span class="text-primary">PETRO</span><span class="text-danger">ENG</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Início</a></li>
+        <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+        <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfólio</a></li>
+        <li class="nav-item"><a class="nav-link" href="noticias.html">Notícias</a></li>
+        <li class="nav-item"><a class="nav-link" href="SAGIP/login.html">SAGIP</a></li>
+        <li class="nav-item"><a class="nav-link" href="contato.html">Fale conosco</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero d-flex align-items-center justify-content-center text-center">
+  <div class="hero-content" data-aos="fade-up">
+        <div class="hero-logo-wrap mb-3">
+            <img src="img/LOGOPETRONEW-transp.png" alt="Petroeng" class="hero-logo">
+        </div>
+    <h1>Há 20 anos projetando um mundo melhor</h1>
+    <p>Excelência em engenharia, inovação e sustentabilidade.</p>
+    <a href="#sobre" class="btn btn-primary btn-lg mt-3">Conheça a Petroeng</a>
+  </div>
+</header>
+
+<!-- SEÇÃO DIFERENCIAIS -->
+<section id="diferenciais" class="py-5 bg-light">
+  <div class="container text-center" data-aos="fade-up">
+    <h2 class="fw-bold text-primary mb-4">Nossos Diferenciais</h2>
+    <p class="text-muted mb-5">Mais do que engenharia, entregamos confiança, segurança e inovação.</p>
+
+    <div class="row g-4">
+      <div class="col-md-4 ">
+        
+        <div class="card border-0 shadow-sm p-4 h-100">
+          <i class= "bi bi-cpu-fill text-primary fs-1 mb-3 "></i>
+          <h5 class="fw-bold">Inovação Tecnológica</h5>
+          <p class="text-muted small">Utilizamos ferramentas digitais e modelagem inteligente (BIM, COMOS, AVEVA PDMS) para otimizar o ciclo de vida dos projetos.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm p-4 h-100">
+          <i class="bi bi-globe-americas text-primary fs-1 mb-3"></i>
+          <h5 class="fw-bold">Sustentabilidade</h5>
+          <p class="text-muted small">Projetos que unem eficiência energética e responsabilidade ambiental, reduzindo impactos e promovendo valor social.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm p-4 h-100">
+          <i class="bi bi-award-fill text-primary fs-1 mb-3"></i>
+          <h5 class="fw-bold">Qualidade Certificada</h5>
+          <p class="text-muted small">Gestão integrada e certificações ISO que asseguram excelência, segurança e transparência em todas as etapas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- SEÇÃO SGI -->
+<section id="sgi" class="py-5 bg-light">
+  <div class="container" data-aos="fade-up">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-primary">Sistema de Gestão Integrada (SGI)</h2>
+      <p class="text-muted mb-0">
+        Comprometida com a ética, a transparência e a melhoria contínua, a Petroeng mantém políticas integradas que fortalecem seu <strong>SGI</strong> — Sistema de Gestão Integrada.
+      </p>
+    </div>
+
+    <div class="row g-4 text-center">
+      <!-- Card 1 -->
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100 p-4">
+          <i class="bi bi-shield-check text-primary fs-1 mb-3"></i>
+          <h5 class="fw-bold mb-2">Política Anticorrupção</h5>
+          <p class="small text-muted mb-3">Compromisso com a integridade e combate ao suborno.</p>
+          <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalAnticorrupcao">
+            Ler Política
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100 p-4">
+          <i class="bi bi-lock text-primary fs-1 mb-3"></i>
+          <h5 class="fw-bold mb-2">Política de Privacidade</h5>
+          <p class="small text-muted mb-3">Proteção de dados à confidencialidade das informações.</p>
+          <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalPrivacidade">
+            Ler Política
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100 p-4">
+          <i class="bi bi-check2-circle text-primary fs-1 mb-3"></i>
+          <h5 class="fw-bold mb-2">Política, Missão e Valores</h5>
+          <p class="small text-muted mb-3">Excelência em processos e satisfação dos clientes.</p>
+          <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalQualidade">
+            Ler Política
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL: Anticorrupção -->
+<div class="modal fade" id="modalAnticorrupcao" tabindex="-1" aria-labelledby="modalAnticorrupcaoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title fw-bold" id="modalAnticorrupcaoLabel">Política Anticorrupção</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <img src="img/anticorrupcao.jpg" alt="Política Anticorrupção" class="img-fluid rounded mb-3">
+        <p>
+          A <strong>Petroeng</strong> repudia qualquer forma de suborno ou corrupção, promovendo uma cultura de integridade
+          e responsabilidade. Nosso sistema está alinhado à <strong>ISO 37.301</strong> e tem como princípio a transparência,
+          a ética e o cumprimento das legislações vigentes.
+        </p>
+        <p>
+          Política Anti-Corrupção
+1. Objetivo
+A Petroeng se relaciona com as partes interessadas, nos âmbitos interno e externo, mantendo um diálogo baseado na ética e na moral. Em respeito às leis e às normas vigentes a Petroeng não concede tratamento diferenciado a quem quer que seja e combate quaisquer formas de corrupção ativa ou passiva. Nesse sentido, a presente Política Anticorrupção se constitui também em código de conduta que, aliado aos demais instrumentos de controle interno da empresa, visa contribuir de forma efetiva para a identificação e mitigação de riscos de atos lesivos praticados contra a Petroeng, tais como desvios, fraudes e irregularidades, estabelecendo diretrizes que orientem seus colaboradores, administradores e demais partes interessadas para a adoção de elevados padrões de integridade, legalidade e transparência, em conformidade com o disposto na Lei Federal nº 12.846/13, conhecida como Lei Anticorrupção, e no Decreto Estadual nº 46.782/15.
+
+2. Abrangência
+A presente Política Anticorrupção se aplica a todos os colaboradores e administradores da Petroeng, bem como a todos os seus fornecedores, prestadores de serviços, autoridades públicas, representantes de agências reguladoras e a qualquer outra parte que mantenha relação contratual com a Petroeng.
+
+3. Definições
+3.1. Colaboradores:
+Diretores, empregados (efetivos ou temporários), estagiários, aprendizes e aqueles que exercem mandato, cargo, emprego ou função, ainda que transitoriamente, por nomeação, designação, contratação ou qualquer outra forma de investidura ou vínculo.
+
+3.2. Fornecedores:
+Todos aqueles que fornecem matéria-prima, equipamentos, materiais, serviços, destinados ao desenvolvimento regular das atividades da organização.
+
+3.3. Concussão:
+Ato praticado por agente público contra a administração pública em geral e consiste em exigir, para si ou para outrem, direta ou indiretamente, ainda que fora da função, ou antes de assumi-la, mas em razão dela, vantagem indevida.
+
+3.4. Conflito de Interesses:
+Situação gerada pelo confronto entre interesses da Petroeng e de terceiros que possa comprometer o interesse da Organização ou influenciar, de maneira imprópria, o desempenho de sua função, independentemente da existência de lesão ao patrimônio da Petroeng ou do recebimento de qualquer vantagem ou ganho por parte de colaborador, administrador ou terceiro.
+
+3.5. Corrupção:
+Ato de corromper alguém, com a finalidade de obter vantagem para si ou terceiros.
+
+3.6. Corrupção Passiva:
+Ato de oferecer ou prometer vantagem indevida a quaisquer agentes públicos para determiná-los a praticar, omitir ou retardar ato de ofício.
+
+3.7. Corrupção Ativa:
+Ato de solicitar ou receber, para si ou para outrem, direta ou indiretamente, ainda que fora do emprego ou da função pública, ou antes de assumi-la, mas em razão dela, vantagem indevida, ou aceitar promessa de tal vantagem.
+
+3.8. Fraude:
+Engano intencional, apropriação indébita de recursos ou manipulação de dados que resulte em vantagem ou desvantagem para uma pessoa, empresa ou entidade, fazendo uso de informação privilegiada em benefício próprio ou de outrem.
+
+3.9. Gestores ou fiscais de contrato:
+Todos os empregados - próprios ou terceirizados – encarregados, supervisores, gerentes, superintendentes, diretores e administradores que atuem na gestão ou fiscalização do contrato.
+
+3.10. “Lavagem” ou ocultação de bens, direitos e valores:
+Ato de dissimular ou ocultar a natureza, origem, localização, disposição, movimentação ou propriedade de bens, direitos e valores provenientes, direta ou indiretamente, de crimes antecedentes.
+
+3.11. Legislação Anticorrupção:
+Dispositivos legais a seguir:
+
+Lei Federal n° 12.846/13: dispõe sobre a responsabilização objetiva administrativa e civil de pessoas jurídicas pela prática de atos contra a administração pública, nacional ou estrangeira;
+
+Decreto Estadual nº 46.782/15: dispõe sobre o Processo Administrativo de Responsabilização previsto na Lei Federal nº 12.846/13, no âmbito da Administração Pública do Poder Executivo Estadual;
+
+Código Penal Brasileiro;
+
+Decreto Federal n° 5.687/06: Convenção das Nações Unidas contra a Corrupção;
+
+Lei Federal n° 8.429/1992: dispõe sobre os atos de Improbidade Administrativa;
+
+Lei Federal n° 9.613/98: dispõe sobre os crimes de “lavagem” ou ocultação de bens, direitos e valores.
+
+3.12. Relação contratual:
+Relação jurídica entre a Petroeng e terceiros, formalizada por meio de instrumento contratual, como por exemplo, contrato, ata de registro de preços, convênio, termo de acordo, termo de doação, termo de cessão, dentre outros.
+
+3.13. Sócios:
+Aqueles que participam de uma sociedade empresária, por serem detentores de uma fração do seu capital social, além de figurarem no seu contrato social.
+
+3.14. Suborno ou Propina:
+Meio pelo qual se pratica a corrupção, visto ser a prática de prometer, oferecer ou pagar a uma autoridade, governante, agente público ou profissional da iniciativa privada qualquer quantidade de dinheiro ou quaisquer outros favores, para que a pessoa em questão deixe de se portar eticamente com seus deveres profissionais.
+
+4. Princípios que norteiam a atuação da Petroeng
+4.1. Probidade:
+Meio pelo qual se pratica a corrupção, visto ser a prática de prometer, oferecer ou pagar a uma autoridade, governante, agente público ou profissional da iniciativa privada qualquer quantidade de dinheiro ou quaisquer outros favores, para que a pessoa em questão deixe de se portar eticamente com seus deveres profissionais.
+
+4.2. Moralidade:
+Impõe aos colaboradores os deveres de observar os preceitos éticos em suas condutas, de averiguar os critérios de conveniência, oportunidade e justiça em suas ações e, ainda, de distinguir o que é honesto do que é desonesto.
+
+4.3. Legalidade:
+Implica subordinação completa do colaborador e fornecedores à lei e as normas da Organização.
+
+4.4. Eficiência:
+Impõe ao colaborador o exercício de suas atividades com foco na obtenção do melhor resultado, com a utilização racional dos meios e dos recursos da companhia.
+
+4.5. Confidencialidade:
+Visa garantir o resguardo das informações institucionais, bem como a proteção contra a sua revelação não autorizada.
+
+4.6 Publicidade/Transparência:
+Busca informar as partes interessadas sobre assuntos relevantes, mantendo ativos os canais de relacionamento interno e externo.
+
+4.7 Impessoalidade:
+Visa garantir a igualdade de tratamento entre indivíduos que estejam em idêntica situação jurídica e a imparcialidade no julgamento de irregularidades denunciadas ou identificadas, com aplicação de critérios objetivos, sem distinções com base em critérios pessoais.
+
+5. Programa de Integridade
+5.1 A Petroeng, com o objetivo de evitar ou detectar desvios, fraudes, irregularidades e atos lesivos praticados contra seu patrimônio, instituiu o Programa de Integridade em aprovação pela Diretoria (Em desenvolvimento), que consiste na implementação de política, diretrizes e procedimentos de combate à corrupção e de apuração de denúncias e irregularidades.
+
+5.2 A Petroeng estabelece, por meio da presente Política e do Código de Ética e Conduta, as diretrizes éticas e de combate à corrupção, à fraude e a outras irregularidades, bem como os procedimentos que devem ser observados e cumpridos por seus colaboradores, administradores, fornecedores, prestadores de serviços e por qualquer outra parte que mantenha relação contratual com a Petroeng.
+
+5.3 É vedada a obtenção de qualquer tipo de vantagem indevida em razão do exercício de cargo, função, emprego ou atividade na Petroeng, bem como a prática de qualquer ação ou omissão que viole os deveres de honestidade, imparcialidade, legalidade e lealdade à referida empresa ou que enseje perda patrimonial, desvio, apropriação ou dilapidação de seus bens ou haveres.
+
+5.4 Para coibir a prática e a ocultação de atos fraudulentos ou ilegais, a Petroeng disponibiliza o “Denuncie Aqui” no site, acessível a qualquer cidadão, para o encaminhamento de denúncias, com garantia de seu anonimato e de independência nas apurações.
+
+6. Controles Internos
+6.1 A Petroeng possui Auditoria Interna que atua de forma independente, com o objetivo de examinar a efetividade, eficácia e integridade dos controles internos, buscando contribuir para a proteção contra fraudes, erros, ineficiências e outras irregularidades que possam ser praticadas por agentes internos ou externos.
+
+7. Conflitos de Interesses
+7.1Petroeng, na busca do gerenciamento eficaz do desempenho da Organização e do comportamento ético de seus administradores, colaboradores, fornecedores, prestadores de serviços, bem como de qualquer outra parte com quem mantenha relação contratual, envida esforços para inibir a prática de atos que possibilitem a ocorrência de fraude ou de corrupção, dentre eles o conflito de interesses.
+
+7.2 A Petroeng proíbe expressamente que seus administradores e colaboradores sejam sócios, administradores, empregados e/ou prestadores de serviços de empresa que possua relação contratual com a Petroeng, em situação que configure conflito de interesses.
+
+7.3 A Petroeng não admite que seus administradores e colaboradores que ocupem função de gestores ou fiscais de contrato tenham envolvimento pessoal ou familiar com sócios, administradores, empregados e/ou prestadores de serviços de empresa que possua relação contratual com a Petroeng, em situação que configure conflito de interesses.
+
+7.4 O colaborador que, no uso de suas atribuições, se defrontar com situação que possa configurar conflito de interesses, estará obrigado a reportar a situação à Organização, mediante o preenchimento prévio da “Declaração de Conflito de Interesses” que será encaminhada à Diretoria para validação.
+
+7.5 Confirmado o conflito de interesses pela Diretoria, deverá ser transferida a atividade conflitante para outro colaborador, sem prejuízo da manutenção do colaborador declarante no exercício das outras atividades em que não se configure o conflito.
+
+8. Sinais de Alerta
+8.1 Todos os colaboradores e administradores da Petroeng devem adotar procedimentos que aprimorem o cumprimento desta Política, ficando sempre atentos a sinais de alerta que possam indicar alguma violação aos dispositivos da Legislação Anticorrupção e desta Política. Os sinais de alerta não são, necessariamente, provas de corrupção, nem desqualificam, automaticamente, qualquer pessoa. No entanto, apresentam-se como indícios que devem ser apurados até que se tenha certeza de que tais sinais não representam infração à Legislação Anticorrupção e à presente Política.
+
+8.2 São sinais de alerta, aos quais todos os colaboradores e administradores devem estar atentos: o recebimento de presentes ou brindes por parte de colaborador ou administrador; a apresentação, por parte de colaborador ou administrador, de enriquecimento ou de situação econômico-financeira incompatível com sua remuneração, sem causa aparente; a deliberada desídia na gestão ou na fiscalização de contratos; a agilização de processos ou procedimentos internos, em detrimento de outros de maior interesse da Petroeng, sem justificativas pertinentes; o excesso de solicitação de adiantamento ou reembolso de despesas de viagem ou deslocamento por colaborador ou administrador, em detrimento da utilização do procedimento padrão da Petroeng para o pagamento de tais despesas; a prestação de serviços externos, por colaborador ou administrador, a empresas que possuem ou possuíram relação contratual com a Petroeng.
+
+8.3 A lista constante do item anterior não é exaustiva, podendo existir outros indícios de ocorrência de vantagens ou pagamentos indevidos ou de qualquer outra violação aos dispositivos da Legislação Anticorrupção ou desta Política.
+
+8.4 Os colaboradores e administradores que perceberem qualquer sinal de alerta que indique violação ou suspeita de violação à Legislação Anticorrupção ou aos dispositivos desta Política devem comunicar o fato imediatamente à Petroeng, por meio do Canal Denuncie Aqui, ou por qualquer outro meio disponível, ficando-lhes garantido o anonimato.
+
+9. Tratamento de Informação Relevante
+9.1 As informações corporativas, ainda que de caráter gerencial, se constituem em Ativos de Informação que integram o patrimônio da Petroeng.
+
+9.2 É vedado aos administradores e colaboradores da Petroeng a divulgação, sem autorização da Diretoria, de informação que possa causar impacto na relação da Organização com o mercado, clientes, prestadores de serviços, fornecedores e demais partes relacionadas.
+
+9.3 Os administradores e colaboradores da Petroeng devem contribuir para assegurar a disponibilidade, a integridade, a confidencialidade e a autenticidade das informações, as quais devem ser utilizadas, exclusivamente, no interesse da Companhia.
+
+10. Sanções Aplicáveis
+10.1 O envolvimento de administradores e colaboradores da Petroeng em atos que violem a Legislação Anticorrupção ou a presente Política acarretará a aplicação das penalidades administrativas cabíveis. Além disso, as referidas violações podem resultar em severas penalidades civis e criminais para todos os envolvidos, bem como para a Petroeng.
+
+10.2 A Petroeng não irá permitir ou tolerar qualquer tipo de retaliação contra qualquer pessoa que apresente denúncia de boa-fé ou queixa de violação a esta Política ou à Legislação Anticorrupção. Se porventura qualquer administrador ou colaborador se envolver em atos de retaliação, ficará sujeito à aplicação das penalidades cabíveis no âmbito administrativo e legal.
+
+10.3 A Petroeng tomará as medidas legais cabíveis contra todas as partes envolvidas nas atividades ilícitas e colocará à disposição das autoridades legais, quando for o caso, todas as evidências coletadas no curso de suas apurações.
+
+11. Conscientização e Treinamento
+A Petroeng, por meio de seu Departamento de Recursos Humanos, manterá um programa de conscientização anticorrupção para seus colaboradores, ministrando treinamento periódico, no mínimo anual, para a disseminação da Legislação Anticorrupção, da presente Política, bem como do Código de Ética e Conduta, devendo ainda verificar, mediante a realização de pesquisa, a aderência da percepção dos colaboradores quanto às disposições de tais Instrumentos.
+
+12. Canal de Linha Ética
+A Petroeng disponibiliza a qualquer pessoa o “Denuncie Aqui” para denúncia anônima de atos que aparentem ou representem violação a esta Política ou à Legislação Anticorrupção, o qual poderá ser acessado através do site da Petroeng.
+
+13. Disposições Finais
+É de competência da Diretoria e do Departamento de Recursos Humanos da Petroeng, realizar a monitoração, a atualização e o aperfeiçoamento contínuo de seus instrumentos de Integridade, dentre os quais se encontra a presente Política Anticorrupção, visando a prevenção, a detecção e o combate à ocorrência dos atos lesivos previstos no artigo 5º da Lei 12.846/2013.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Privacidade -->
+<div class="modal fade" id="modalPrivacidade" tabindex="-1" aria-labelledby="modalPrivacidadeLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title fw-bold" id="modalPrivacidadeLabel">Política de Privacidade</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <img src="img/privacidade.jpg" alt="Política de Privacidade" class="img-fluid rounded mb-3">
+        <p>
+          A Petroeng valoriza a privacidade e segurança das informações pessoais, cumprindo as exigências da <strong>LGPD (Lei Geral de Proteção de Dados)</strong>.
+        </p>
+        <p>
+          Política de Privacidade
+Na Petroeng, privacidade e segurança são prioridades e nos comprometemos com a transparência do tratamento de dados pessoais dos nossos usuários/colaboradores. Por isso, esta presente Política de Privacidade estabelece como é feita a coleta, uso e transferência de informações de clientes ou outras pessoas que acessam ou usam nosso site. Ao utilizar nossos serviços, você entende que coletaremos e usaremos suas informações pessoais nas formas descritas nesta Política, sob as normas de Proteção de Dados (LGPD, Lei Federal 13.709/2018), das disposições consumeristas da Lei Federal 8078/1990 e as demais normas do ordenamento jurídico brasileiro aplicáveis. Dessa forma, a Petroeng Consultoria e Projetos Industriais Ltda., doravante denominada simplesmente como “Petroeng”, inscrita no CNPJ/MF sob o nº 04.902.445/0001-18, no papel de Controladora de Dados, obriga-se ao disposto na presente Política de Privacidade.
+
+1. Quais dados coletamos sobre você e para qual finalidade?
+Nosso site coleta e utiliza alguns dados pessoais seus, de forma a viabilizar a prestação de serviços e aprimorar a experiência de uso.
+
+1.1. Dados pessoais fornecidos pelo titular
+1.1.1. Dados para contrato de trabalho
+Nome Completo;
+Data de Nascimento;
+Carteira de Identidade (RG);
+Cadastro de Pessoas Físicas (CPF);
+Carteira Nacional de Habilitação (CNH) - somente para colaboradores que necessitem dirigir os automóveis da empresa;
+Fotografia 3x4 (para identificação visual);
+PIS;
+CTPS;
+Estado civil;
+Nível de instrução ou escolaridade;
+Certificados obrigatórios conforme função/cargo como, por exemplo, CBASI ou NR-10;
+Endereço completo;
+Telefone pessoal;
+E-mail pessoal – para uso restrito de envio de circulares e comunicação;
+Banco, agência e número de contas bancárias - para pagamento de salários;
+Raça (para o cadastro RAIS);
+Nome do pai e da mãe;
+Dependentes plano de saúde (Nome, Parentesco, CPF e Data de Nascimento, Certidão de Nascimento, Certidão de Casamento, entre outros).
+Termo de consentimento de uso dos dados pessoais para contrato de trabalho.
+A solicitação dos dados estará restrita ao exigido no contrato de trabalho de acordo com a função a ser exercida e os benefícios previstos que façam exigência de alguns destes dados. O tratamento dos dados estará restrita ao RH da unidade Petroeng contratante e serão imediatamente desativados após rescisão contratual, sendo definitivamente apagados do arquivo morto, automaticamente, 5 anos após a rescisão contratual. Os dados serão compartilhados com o escritório contábil Ka Serviços a fim de gerir todas as questões legais (CLT e estagiários) como por exemplo transmissão destes dados para o E-social. Bem como, estes dados poderão ser compartilhados, com empresas nas quais a Petroeng possua contrato caso o futuro funcionário venha a trabalhar nas unidades das empresas contratantes conforme conhecimento e consentimento do mesmo.
+
+1.1.2. Solicitação de documentos e/ou transparência dos dados pessoais por ex-colaboradores
+Nome Completo;
+Cadastro de Pessoa Física (CPF);
+Número de telefone;
+E-mail pessoal.
+Caso o e-mail pessoal combine com o e-mail armazenado no arquivo morto e documento esteja disponível online, um link para o download do documento será enviado automaticamente para o ex-funcionário. Caso contraria, ou link enviado expire, nosso pessoal do RH entrará em contato por telefone para confirmação dos dados e legitimação do titular solicitante.
+
+1.1.3. Dados para contatos comerciais
+Nome Completo;
+Telefone Comercial;
+E-mail Comercial.
+Os dados serão disponibilizados para o departamento comercial e serão utilizados exclusivamente para o propósito comercial solicitado.
+
+1.1.4. Dados para envio de currículo e participação de seleção em ofertas de vagas pela Petroeng
+Nome Completo;
+Cadastro de Pessoa Física (CPF);
+Número de telefone;
+E-mail pessoal.
+Currículo
+Vaga pretendida
+Os dados pessoais serão utilizadas exclusivamente com a finalidade de contratação de trabalho e preenchimento de vagas de emprego. Para o envio de currículo sem uma oferta de vaga específica, o mesmo ficará disponível em nossa base de dados por 6 meses e após este período excluído automaticamente. Caso o usuário deseje atualizar os dados deverá realizar um novo cadastro que sobrescreverá o anterior. Para envio de currículo para oferta de vaga específica os dados dos usuários não contemplados serão excluídos do sistema após o preenchimento da vaga.
+
+2. Como coletamos os seus dados?
+Nesse sentido, a coleta dos seus dados pessoais ocorre unicamente através dos formulários no website apresentados no Tópico 1.
+
+2.1. Consentimento
+É a partir do seu consentimento que tratamos os seus dados pessoais. O consentimento é a manifestação livre, informada e inequívoca pela qual você autoriza a Petroeng a tratar seus dados. Assim, em consonância com a Lei Geral de Proteção de Dados, seus dados só serão coletados, tratados e armazenados mediante prévio e expresso consentimento. O seu consentimento será obtido de forma específica para cada finalidade acima descrita, evidenciando o compromisso de transparência e boa-fé da Petroeng para com seus usuários/colaboradores, seguindo as regulações legislativas pertinentes. Ao utilizar os serviços da Petroeng e fornecer seus dados pessoais, você está ciente e consentindo com as disposições desta Política de Privacidade, além de conhecer seus direitos e como exercê-los. A qualquer tempo e sem nenhum custo, você poderá revogar seu consentimento. É importante destacar que a revogação do consentimento para o tratamento dos dados pode implicar a impossibilidade da performance adequada de alguma funcionalidade do site que dependa da operação. Tais consequências serão informadas previamente.
+
+3. Quais são os seus direitos?
+A Petroeng assegura a seus usuários/colaboradores seus direitos de titular previstos no artigo 18 da Lei Geral de Proteção de Dados. Dessa forma, você pode, de maneira gratuita e a qualquer tempo:
+
+Confirmar a existência de tratamento de dados, de maneira simplificada ou em formato claro e completo.
+Acessar seus dados, podendo solicitá-los em uma cópia legível sob forma impressa ou por meio eletrônico, seguro e idôneo.
+Corrigir seus dados, ao solicitar a edição, correção ou atualização destes.
+Limitar seus dados quando desnecessários, excessivos ou tratados em desconformidade com a legislação através da anonimização, bloqueio ou eliminação.
+Solicitar a portabilidade de seus dados, através de um relatório de dados cadastrais que a Petroeng trata a seu respeito.
+Eliminar seus dados tratados a partir de seu consentimento, exceto nos casos previstos em lei.
+Revogar seu consentimento, desautorizando o tratamento de seus dados.
+Informar-se sobre a possibilidade de não fornecer seu consentimento e sobre as consequências da negativa.
+4. Como você pode exercer seus direitos de titular?
+Para exercer seus direitos de titular, você deve entrar em contato com a Petroeng através dos seguintes meios disponíveis:
+
+E-mail: privacidade@petroeng.com.br;
+Ex-funcionários: formulário de solicitação de documentação e/ou dados pessoais no website da Petroeng.
+Funcionários: Através de acesso ao SAGIP → Dados Pessoais.
+De forma a garantir a sua correta identificação como titular dos dados pessoais objeto da solicitação, é possível que solicitemos documentos ou demais comprovações que possam comprovar sua identidade. Nessa hipótese, você será informado previamente.
+
+5. Como e por quanto tempo seus dados serão armazenados?
+Seus dados pessoais coletados pela Petroeng serão utilizados e armazenados durante o tempo necessário para a prestação do serviço ou para que as finalidades elencadas na presente Política de Privacidade sejam atingidas, considerando os direitos dos titulares dos dados e dos controladores. De modo geral, seus dados serão mantidos enquanto a relação contratual entre você e a Petroeng perdurar. Findado o período de armazenamento dos dados pessoais, estes serão excluídos de nossas bases de dados ou anonimizados, ressalvadas as hipóteses legalmente previstas no artigo 16 lei geral de proteção de dados, a saber:
+
+I – cumprimento de obrigação legal ou regulatória pelo controlador;
+II – estudo por órgão de pesquisa, garantida, sempre que possível, a anonimização dos dados pessoais;
+III – transferência a terceiro, desde que respeitados os requisitos de tratamento de dados dispostos nesta Lei; ou
+IV – uso exclusivo do controlador, vedado seu acesso por terceiro, e desde que anonimizados os dados.
+Isto é, informações pessoais sobre você que sejam imprescindíveis para o cumprimento de determinações legais, judiciais e administrativas e/ou para o exercício do direito de defesa em processos judiciais e administrativos serão mantidas, a despeito da exclusão dos demais dados. O armazenamento de dados coletados pela Petroeng reflete o nosso compromisso com a segurança e privacidade dos seus dados. Empregamos medidas e soluções técnicas de proteção aptas a garantir a confidencialidade, integridade e inviolabilidade dos seus dados. Além disso, também contamos com medidas de segurança apropriadas aos riscos e com controle de acesso às informações armazenadas.
+
+6. O que fazemos para manter seus dados seguros?
+Para mantermos suas informações pessoais seguras, usamos ferramentas físicas, eletrônicas e gerenciais orientadas para a proteção da sua privacidade. Aplicamos essas ferramentas levando em consideração a natureza dos dados pessoais coletados, o contexto e a finalidade do tratamento e os riscos que eventuais violações gerariam para os direitos e liberdades do titular dos dados coletados e tratados. Entre as medidas que adotamos, destacamos as seguintes:
+
+Apenas pessoas autorizadas têm acesso a seus dados pessoais
+O acesso a seus dados pessoais é feito somente após o compromisso de confidencialidade.
+Seus dados pessoais são armazenados em ambiente seguro e idôneo. A Petroeng se compromete a adotar as melhores posturas para evitar incidentes de segurança. Contudo, é necessário destacar que nenhuma página virtual é inteiramente segura e livre de riscos. É possível que, apesar de todos os nossos protocolos de segurança, problemas de culpa exclusivamente de terceiros ocorram, como ataques cibernéticos de hackers, ou também em decorrência da negligência ou imprudência do próprio usuário/colaborador. Em caso de incidentes de segurança que possa gerar risco ou dano relevante para você ou qualquer um de nossos usuários/colaboradores, comunicaremos aos afetados e a Autoridade Nacional de Proteção de Dados sobre o ocorrido, em consonância com as disposições da Lei Geral de Proteção de Dados.
+7. Com quem seus dados podem ser compartilhados?
+Tendo em vista a preservação de sua privacidade, a Petroeng não compartilhará seus dados pessoais com nenhum terceiro não autorizado. Seus dados poderão ser compartilhados com nossos parceiros comerciais: Ka Serviços, inscrito no CNPJ sob o nº 08.223.980/0001-01, nosso escritório de assessoria contábil. Estes recebem seus dados apenas na medida do necessário para a prestação dos serviços contratados e nossos contratos são orientados pelas normas de proteção de dados do ordenamento jurídico brasileiro. Todavia, nossos parceiros têm suas próprias Políticas de Privacidade, que podem divergir desta. Recomendamos a leitura desses documentos, que você pode acessar aqui https://kaservicos.com.br/.
+
+I – Determinação legal, requerimento, requisição ou ordem judicial, com autoridades judiciais, administrativas ou governamentais competentes;
+II – Caso de movimentações societárias, como fusão, aquisição e incorporação, de forma automática;
+III – Proteção dos direitos da Petroeng em qualquer tipo de conflito, inclusive os de teor judicial.
+7.1. Transferência internacional de dados
+Alguns dos terceiros com quem compartilhamos seus dados podem ser localizados ou ou possuir instalações localizadas em países estrangeiros. Nessas condições, de toda forma, seus dados pessoais estarão sujeitos à Lei Geral de Proteção de Dados e às demais legislações brasileiras de proteção de dados Nesse sentido, a Petroeng se compromete a sempre adotar eficientes padrões de segurança cibernética e de proteção de dados, nos melhores esforços de garantir e cumprir as exigências legislativas. Ao concordar com essa Política de Privacidade, você concorda com esse compartilhamento, que se dará conforme as finalidades descritas no presente instrumento.
+
+8. Cookies ou dados de navegação
+A Petroeng faz uso de Cookies, que são arquivos de texto enviados pela plataforma ao seu computador e que nele se armazenam, que contém informações relacionadas à navegação do site. Em suma, os Cookies são utilizados para aprimorar a experiência de uso. Ao acessar nosso site e consentir com o uso de Cookies, você manifesta conhecer e aceitar a utilização de um sistema de coleta de dados de navegação com o uso de Cookies em seu dispositivo. A Petroeng utiliza os seguintes Cookies:
+
+a) cookies de sessão - também chamado de cookie transitório, que é apagado quando você fecha o navegador de internet. Ele é armazenado na memória temporária do computador e não é retido depois que o navegador é encerrado;
+b) cookies persistentes - também chamado de cookie permanente, que é armazenado em seu disco rígido até expirar (cookies persistentes são definidos com datas de expiração) ou até você excluir. Estes com finalidade única para validação de usuário no nosso sistema SAGIP.
+Você pode, a qualquer tempo e sem nenhum custo, alterar as permissões, bloquear ou recusar os Cookies. Todavia, a revogação do consentimento de determinados Cookies pode inviabilizar o funcionamento correto de alguns recursos da plataforma. Para gerenciar os cookies do seu navegador, basta fazê-lo diretamente nas configurações do navegador, na área de gestão de Cookies. Você pode acessar tutoriais sobre o tema diretamente nos links abaixo:
+
+Se você usa o Internet Explorer.
+Se você usa o Firefox.
+Se você usa o Safari.
+Se você usa o Google Chrome.
+Se você usa o Microsoft Edge.
+Se você usa o Opera.
+9. Alteração desta Política de Privacidade
+A atual versão da Política de Privacidade foi formulada e atualizada pela última vez em 13/06/2021. Reservamos o direito de modificar essa Política de Privacidade a qualquer tempo, principalmente em função da adequação a eventuais alterações feitas em nosso site ou em âmbito legislativo. Recomendamos que você a revise com frequência. Eventuais alterações entrarão em vigor a partir de sua publicação em nosso site e sempre lhe notificaremos acerca das mudanças ocorridas. Ao utilizar nossos serviços e fornecer seus dados pessoais após tais modificações, você as consente.
+
+10. Responsabilidade
+A Petroeng prevê a responsabilidade dos agentes que atuam nos processos de tratamento de dados, em conformidade com os artigos 42 ao 45 da Lei Geral de Proteção de Dados. Nos comprometemos em manter esta Política de Privacidade atualizada, observando suas disposições e zelando por seu cumprimento. Além disso, também assumimos o compromisso de buscar condições técnicas e organizativas seguramente aptas a proteger todo o processo de tratamento de dados. Caso a Autoridade Nacional de Proteção de Dados exija a adoção de providências em relação ao tratamento de dados realizado pela Petroeng,comprometemo-nos a segui-las.
+
+10.1. Isenção de responsabilidade
+Conforme mencionado no Tópico 6, embora adotemos elevados padrões de segurança a fim de evitar incidentes, não há nenhuma página virtual inteiramente livre de riscos. Nesse sentido, a Petroeng não se responsabiliza por:
+
+I – Quaisquer consequências decorrentes da negligência, imprudência ou imperícia dos usuários em relação a seus dados individuais. Garantimos e nos responsabilizamos apenas pela segurança dos processos de tratamento de dados e do cumprimento das finalidades descritas no presente instrumento.Destacamos que a responsabilidade em relação à confidencialidade dos dados de acesso é do usuário.
+II – Ações maliciosas de terceiros, como ataques de hackers, exceto se comprovada conduta culposa ou deliberada da Petroeng. Destacamos que em caso de incidentes de segurança que possam gerar risco ou dano relevante para você ou qualquer um de nossos usuários/colaboradores, comunicaremos aos afetados e a Autoridade Nacional de Proteção de Dados sobre o ocorrido e cumpriremos as providências necessárias.
+III – Inveracidade das informações inseridas pelo usuário/colaborador nos registros necessários para a utilização dos serviços da Petroeng; quaisquer consequências decorrentes de informações falsas ou inseridas de má-fé são de inteiramente responsabilidade do usuário/colaborador.
+11. Encarregado de Proteção de Dados
+A Petroeng disponibiliza o seguinte e-mail para que você possa entrar em contato conosco para exercer seus direitos de titular: privacidade@petroeng.com.br. Caso tenha dúvidas sobre esta Política de Privacidade ou sobre os dados pessoais que tratamos, você pode entrar em contato com o nosso Encarregado de Proteção de Dados Pessoais, através do e-mail supracitado.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Qualidade -->
+<div class="modal fade" id="modalQualidade" tabindex="-1" aria-labelledby="modalQualidadeLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title fw-bold" id="modalQualidadeLabel">Política do Sistema de Gestão da Qualidade</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <img src="img/qualidade.jpg" alt="Política de Qualidade" class="img-fluid rounded mb-3">
+        <p>
+          A <strong>Petroeng</strong> busca continuamente a excelência em seus processos, produtos e serviços, atendendo aos requisitos da norma <strong>ISO 9001</strong>.
+        </p>
+        <p>
+          Política do Sistema de Gestão de Qualidade
+Em conformidade com as normas e proposito do Sistema de Gestão da Qualidade, a PETROENG estabelece, implementa, mantem os seguintes compromissos que apoiam o seu direcionamento estratégico e desenvolvimento sustentável:
+Perseguir a satisfação do cliente e outras partes interessadas, com eficiência e qualidade pertinentes ao cumprimento das necessidades e expectativas;
+Proteger o meio ambiente, com ações que previnam a poluição e reduzam os impactos ambientais das atividades e serviços fornecidos;
+Preservar a saúde e a integridade física dos colaboradores, proporcionando trabalho seguro, com eliminação dos perigos e redução dos riscos dos processos organizacionais;
+Melhorar continuamente a qualidade de nossos serviços, Inovando e aperfeiçoando sempre os métodos de trabalho, visando a evolução do sistema de gestão;
+Cumprir integralmente todas as legislações, regulamentações e normas aplicáveis aos nossos negócios, onde a Petroeng atuar;
+Incentivar o treinamento e conscientização, visando o comprometimento dos trabalhadores, na promoção da participação e consulta destes, nos processos relativos a saúde e segurança ocupacional;
+Promover uma cultura de integridade e transparência em todas as nossas operações, assegurando que todos os colaboradores, provedores e parceiros sigam os mais altos padrões de conduta ética e compliance.
+        </p>
+        <p><strong>Missão</strong>
+Oferecer soluções de Engenharia Consultiva, Projetos Industriais e cessão de mão de obra especializada, atendendo toda a cadeia produtiva do setor de Petróleo e Gás, com foco em inovação e eficiência, contribuindo para o desenvolvimento tecnológico e econômico do País.</p>
+          <p><strong> Visão </strong>
+Ser reconhecida até 2030 entre as cinco maiores empresas em Engenharia Consultiva, Projetos Industriais e cessão de mão de obra especializada para o Mercado Brasileiro, além de expandir seus negócios internacionalmente para outros países da América do Sul.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SEÇÃO SOLUÇÕES -->
+<section id="solucoes" class="py-5">
+  <div class="container text-center" data-aos="fade-up">
+    <h2 class="fw-bold text-primary mb-4">Soluções Integradas</h2>
+    <p class="text-muted mb-5">Da concepção ao comissionamento, a Petroeng entrega soluções completas e multidisciplinares.</p>
+
+    <div class="row row-cols-2 row-cols-md-4 g-4">
+      <div class="col">
+        <div class="card border-0 shadow-sm p-4 h-100">
+          <i class="bi bi-building-gear fs-1 text-primary mb-3"></i>
+          <h6 class="fw-bold">Projetos Industriais</h6>
+          <p class="small text-muted">Engenharia básica e detalhada para empreendimentos de grande porte.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card border-0 shadow-sm p-4 h-100">
+          <i class="bi bi-diagram-3 fs-1 text-primary mb-3"></i>
+          <h6 class="fw-bold">Gerenciamento e Planejamento</h6>
+          <p class="small text-muted">Coordenação técnica e gestão de obras com eficiência e precisão.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card border-0 shadow-sm p-4 h-100">
+          <i class="bi bi-lightning-charge-fill fs-1 text-primary mb-3"></i>
+          <h6 class="fw-bold">Energia e Elétrica</h6>
+          <p class="small text-muted">Soluções elétricas industriais, painéis, subestações e automação.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card border-0 shadow-sm p-4 h-100">
+          <i class="bi bi-recycle fs-1 text-primary mb-3"></i>
+          <h6 class="fw-bold">Sustentabilidade</h6>
+          <p class="small text-muted">Engenharia ambiental e processos de tratamento de efluentes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEÇÃO UNIDADES INTERATIVAS -->
+<section id="unidades" class="py-5 bg-white">
+  <div class="container text-center" data-aos="fade-up">
+    <h2 class="fw-bold text-primary mb-4">Unidades Petroeng</h2>
+    <div class="row align-items-center g-5">
+      <!-- Mapa -->
+      <div class="col-md-7 text-center">
+        <div class="position-relative">
+          <img src="img/mapa-brasil.svg" alt="Mapa do Brasil" class="img-fluid rounded shadow-sm" id="mapaPetroeng">
+          
+          <!-- Marcadores (pinos) -->
+          <div class="map-pin" style="top: 40%; left: 78%;" data-cidade="Aracaju-SE"></div>
+          <div class="map-pin" style="top: 45%; left: 76%;" data-cidade="Lauro de Freitas-BA"></div>
+          <div class="map-pin" style="top: 29%; left: 82%;" data-cidade="Natal-RN"></div>
+          <div class="map-pin" style="top: 68%; left: 67%;" data-cidade="Rio de Janeiro-RJ"></div>
+          <div class="map-pin" style="top: 66%; left: 70%;" data-cidade="Macaé-RJ"></div>
+        </div>
+      </div>
+
+      <!-- Lista -->
+      <div class="col-md-5">
+  <div class="p-4 rounded shadow-sm bg-primary text-light">
+    <h4 class="fw-bold mb-3">Unidades Petroeng</h4>
+    <p class="text-white-50 small mb-4">
+      Clique em uma unidade no mapa ou selecione na lista abaixo.
+    </p>
+
+    <div class="accordion accordion-flush" id="accordionUnidades">
+      <div class="accordion-item bg-transparent border-0">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ba">
+            Lauro de Freitas - BA <small class="ms-2 text-white-50">(Matriz)</small>
+          </button>
+        </h2>
+        <div id="ba" class="accordion-collapse collapse" data-bs-parent="#accordionUnidades">
+          <div class="accordion-body">
+            Rua João Chagas Ortins de Freitas, 577 – Ed. Mais Empresarial, Sala 201, Buraquinho<br>
+            CEP: 42710-610<br>
+            Lauro de Freitas - BA<br>
+            <strong>Telefone:</strong> (71) 3024-2232
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item bg-transparent border-0">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#se">
+            Aracaju - SE <small class="ms-2 text-white-50">(Filial)</small>
+          </button>
+        </h2>
+        <div id="se" class="accordion-collapse collapse" data-bs-parent="#accordionUnidades">
+          <div class="accordion-body">
+            Rua Heriberto Góes, 285 – Coroa do Meio<br>
+            CEP: 49035-380<br>
+            Aracaju - SE<br>
+            <strong>Telefone:</strong> (79) 3027-8092
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item bg-transparent border-0">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rj">
+            Rio de Janeiro - RJ <small class="ms-2 text-white-50">(Filial)</small>
+          </button>
+        </h2>
+        <div id="rj" class="accordion-collapse collapse" data-bs-parent="#accordionUnidades">
+          <div class="accordion-body">
+            Rua Senador Dantas, 75 – Sala 2811, Ed. Christian Barnard, Centro<br>
+            CEP: 20031-914<br>
+            Rio de Janeiro - RJ
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item bg-transparent border-0">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#macae">
+            Macaé - RJ <small class="ms-2 text-white-50">(Filial)</small>
+          </button>
+        </h2>
+        <div id="macae" class="accordion-collapse collapse" data-bs-parent="#accordionUnidades">
+          <div class="accordion-body">
+            Av. Agenor Caldas, 193 – Ed. Júlio Olival, Sala 206, Imbetiba<br>
+            CEP: 27913-300<br>
+            Macaé - RJ
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item bg-transparent border-0">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rn">
+            Natal - RN <small class="ms-2 text-white-50">(Filial)</small>
+          </button>
+        </h2>
+        <div id="rn" class="accordion-collapse collapse" data-bs-parent="#accordionUnidades">
+          <div class="accordion-body">
+            Av. Amintas Barros, 3700 – Lagoa Nova, Corporate Tower Center (Torre B, Sala 304)<br>
+            CEP: 59075-810<br>
+            Natal - RN
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- SEÇÃO DEPOIMENTOS -->
+<section id="depoimentos" class="py-5 bg-light position-relative overflow-hidden">
+  <div class="container text-center" data-aos="fade-up">
+    <h2 class="fw-bold text-primary mb-4">O que dizem sobre a Petroeng</h2>
+
+    <div id="carouselDepo" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+      <div class="carousel-inner">
+
+        <div class="carousel-item active">
+          <div class="card border-0 shadow-lg mx-auto p-4" style="max-width: 650px;">
+            <i class="bi bi-quote text-primary fs-1 mb-3"></i>
+            <p class="lead text-muted fst-italic mb-4">
+              “A Petroeng é uma parceira estratégica que alia técnica e comprometimento em cada entrega.”
+            </p>
+            <h5 class="fw-bold text-dark mb-0">Marcos Alcântara</h5>
+            <small class="text-secondary">Gerente de Projetos, Transpetro</small>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="card border-0 shadow-lg mx-auto p-4" style="max-width: 650px;">
+            <i class="bi bi-quote text-primary fs-1 mb-3"></i>
+            <p class="lead text-muted fst-italic mb-4">
+              “Referência em engenharia industrial, sempre cumprindo prazos e metas com excelência.”
+            </p>
+            <h5 class="fw-bold text-dark mb-0">Alice Braga</h5>
+            <small class="text-secondary">Coordenadora de Obras, Raízen</small>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="card border-0 shadow-lg mx-auto p-4" style="max-width: 650px;">
+            <i class="bi bi-quote text-primary fs-1 mb-3"></i>
+            <p class="lead text-muted fst-italic mb-4">
+              “A Petroeng eleva o padrão de qualidade em serviços multidisciplinares.”
+            </p>
+            <h5 class="fw-bold text-dark mb-0">Bárbara Dias</h5>
+            <small class="text-secondary">Diretora Técnica, Origem Energia</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controles -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselDepo" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselDepo" data-bs-slide="next">
+        <span class="carousel-control-next-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+        <span class="visually-hidden">Próximo</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- SEÇÃO ÚLTIMAS NOTÍCIAS -->
+<section id="ultimas-noticias" class="py-5 bg-light">
+  <div class="container text-center" data-aos="fade-up">
+    <h2 class="fw-bold text-primary mb-4">Últimas Notícias</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+          <img src="img/noticias/iso.jpg" class="card-img-top" alt="">
+          <div class="card-body">
+            <h5 class="fw-bold">Petroeng renova certificação ISO 9001</h5>
+            <p class="small text-muted">Reconhecimento pela qualidade e melhoria contínua em processos de gestão.</p>
+            <a href="noticias.html" class="btn btn-outline-primary btn-sm">Leia mais</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+          <img src="img/noticias/automacao.jpg" class="card-img-top" alt="">
+          <div class="card-body">
+            <h5 class="fw-bold">Novo projeto em parceria com Origem Energia</h5>
+            <p class="small text-muted">Integração de soluções mecânicas e elétricas para plantas industriais.</p>
+            <a href="noticias.html" class="btn btn-outline-primary btn-sm">Leia mais</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+          <img src="img/noticias/engsuste.jpg" class="card-img-top" alt="">
+          <div class="card-body">
+            <h5 class="fw-bold">Petroeng amplia foco em sustentabilidade</h5>
+            <p class="small text-muted">Novos investimentos em tecnologias verdes e práticas sustentáveis.</p>
+            <a href="noticias.html" class="btn btn-outline-primary btn-sm">Leia mais</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+    <!-- SAGIP - Banner Institucional -->
+<section id="sagip-banner" class="py-5">
+  <div class="container">
+    <div class="row align-items-center text-center text-md-start" data-aos="fade-up">
+      <div class="col-md-8 d-flex align-items-center justify-content-center justify-content-md-start mb-3 mb-md-0">
+        <img src="img/sagip-icon.png" alt="SAGIP" class="sagip-banner-logo me-md-3">
+        <div>
+          <h3 class="fw-bold mb-1 sagip-title">SAGIP</h3>
+          <p class="text-muted mb-0">Sistema Automatizado de Gestão Integrada da Petroeng</p>
+        </div>
+      </div>
+      <div class="col-md-4 text-center text-md-end">
+        <a href="SAGIP/login.html" class="btn btn-primary btn-lg sagip-btn">
+          <i class="bi bi-box-arrow-in-right"></i> Acessar Sistema
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+  
+  <!-- FOOTER -->
+<footer id="footer" class="text-light pt-5">
+  <!-- Faixa de Certificações -->
+  <div class="footer-certificacoes py-3">
+    <div class="container d-flex flex-wrap justify-content-center align-items-center gap-4 text-center text-md-start">
+      <div class="d-flex align-items-center gap-3">
+        <i class="bi bi-shield-check text-warning fs-3"></i>
+        <div>
+          <h6 class="fw-bold mb-0 text-white">ISO 37.301</h6>
+          <small class="text-white-50">Sistema de Gestão Antissuborno</small>
+        </div>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <i class="bi bi-check2-circle text-warning fs-3"></i>
+        <div>
+          <h6 class="fw-bold mb-0 text-white">ISO 9001</h6>
+          <small class="text-white-50">Gestão da Qualidade</small>
+        </div>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <i class="bi bi-globe-americas text-warning fs-3"></i>
+        <div>
+          <h6 class="fw-bold mb-0 text-white">ISO 14001</h6>
+          <small class="text-white-50">Gestão Ambiental</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conteúdo principal do footer -->
+  <div class="container pb-4 pt-5">
+    <div class="row gy-4 align-items-center">
+
+      <!-- Coluna 1: logo + texto -->
+      <div class="col-md-5 text-center text-md-start">
+        <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-3">
+          <img src="img/LOGOPETRONEW.png" alt="Petroeng" class="footer-logo">
+          <p class="small mb-0 text-white-50">
+            Excelência em engenharia multidisciplinar,<br>
+            com soluções inovadoras e sustentáveis para o setor industrial.
+          </p>
+        </div>
+      </div>
+
+      <!-- Coluna 2: links -->
+      <div class="col-md-4 text-center">
+        <h6 class="fw-bold mb-3">Navegação</h6>
+        <ul class="list-unstyled small mb-0">
+          <li><a href="#sobre" class="footer-link">Sobre</a></li>
+          <li><a href="#atuacao" class="footer-link">Áreas de Atuação</a></li>
+          <li><a href="#clientes" class="footer-link">Clientes</a></li>
+          <li><a href="#contato" class="footer-link">Contato</a></li>
+          <li><a href="login.html" class="footer-link">SAGIP</a></li>
+        </ul>
+      </div>
+
+      <!-- Coluna 3: contato e redes -->
+      <div class="col-md-3 text-center text-md-end">
+        <h6 class="fw-bold mb-3">Contato</h6>
+        <p class="mb-1 small"><i class="bi bi-telephone-fill"></i> +55 (71) 3024-2232</p>
+        <p class="mb-1 small"><i class="bi bi-envelope-fill"></i> contato@petroeng.com.br</p>
+        <div class="d-flex justify-content-center justify-content-md-end gap-3 mt-3">
+          <a href="#" class="footer-social"><i class="bi bi-linkedin"></i></a>
+          <a href="#" class="footer-social"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="footer-social"><i class="bi bi-instagram"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Barra inferior -->
+  <div class="footer-bottom py-3 text-center small text-white-50">
+    © 2025 Petroeng Engenharia – Todos os direitos reservados.
+  </div>
+
+  
+</footer>
+
+<script>
+document.querySelectorAll('.map-pin').forEach(pin => {
+  pin.addEventListener('click', () => {
+    alert(`Você clicou em ${pin.dataset.cidade}`);
+  });
+});
+</script>
+  
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
