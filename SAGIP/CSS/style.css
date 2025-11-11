@@ -1,0 +1,53 @@
+/* Fundo do login com overlay */
+.login-bg {
+  position: relative;
+  min-height: 100vh;
+  background: url('../img/bkg3.jpg') center/cover no-repeat;
+  /* Se quiser efeito parallax leve no desktop, ative a linha abaixo;
+     no mobile pode causar jank, então deixe comentado se preferir.
+  background-attachment: fixed;
+  */
+}
+.login-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* overlay para melhorar contraste do card */
+  background: linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.55));
+}
+
+/* Card tipo glassmorphism */
+.login-card {
+  position: relative;
+  z-index: 1;                /* fica acima do overlay */
+  width: 100%;
+  max-width: 400px;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.493);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.35);
+}
+
+/* Ajustes de imagem do logo do SAGIP se precisar */
+.login-card img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Tornar o card menor no mobile */
+@media (max-width: 576px) {
+  .login-card {
+    max-width: 320px;
+    padding: 1.25rem !important;
+    margin: 0 1rem;
+  }
+
+  .login-card img {
+    width: 140px !important;
+  }
+
+  .login-card h4 {
+    font-size: 1rem;
+  }
+}
